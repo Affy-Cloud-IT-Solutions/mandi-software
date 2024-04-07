@@ -36,12 +36,32 @@ CREATE TABLE IF NOT EXISTS `brands` (
   KEY `brands_company_id_foreign` (`company_id`),
   KEY `brands_brandname_index` (`brandName`),
   CONSTRAINT `brands_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table management_1.brands: ~2 rows (approximately)
+-- Dumping data for table management_1.brands: ~22 rows (approximately)
 INSERT INTO `brands` (`id`, `brandName`, `ownerName`, `numberOfCrates`, `company_id`, `company_idd`, `is_delete`, `created_at`, `updated_at`) VALUES
-	(1, 'whirlpool', 'ahad', '4', NULL, 'affy9629', 0, '2024-04-07 01:40:31', NULL),
-	(2, 'apple', 'arsalan', '6', NULL, 'affy1111', 1, '2024-04-07 01:59:48', NULL);
+	(4, 'apple', 'ahad', '4', NULL, 'affy9629', 0, '2024-04-07 08:24:46', NULL),
+	(5, 'samsung', 'john', '7', NULL, 'affy9629', 0, '2023-10-15 03:51:30', NULL),
+	(6, 'nike', 'emma', '12', NULL, 'affy9629', 0, '2022-12-30 13:15:00', NULL),
+	(7, 'adidas', 'michael', '9', NULL, 'affy9629', 0, '2022-11-05 05:40:20', NULL),
+	(8, 'google', 'susan', '15', NULL, 'affy9629', 0, '2023-05-20 09:00:55', NULL),
+	(9, 'amazon', 'david', '20', NULL, 'affy9629', 0, '2022-09-10 01:42:48', NULL),
+	(10, 'tesla', 'mark', '6', NULL, 'affy9629', 0, '2023-03-18 11:08:12', NULL),
+	(11, 'microsoft', 'laura', '10', NULL, 'affy9629', 0, '2024-01-05 14:30:30', NULL),
+	(12, 'huawei', 'kevin', '8', NULL, 'affy9629', 0, '2023-08-25 07:15:55', NULL),
+	(13, 'toyota', 'emily', '18', NULL, 'affy9629', 0, '2022-07-12 04:20:15', NULL),
+	(14, 'cocacola', 'chris', '14', NULL, 'affy9629', 0, '2023-06-28 12:25:40', NULL),
+	(15, 'pepsi', 'linda', '11', NULL, 'affy9629', 0, '2022-04-04 07:55:00', NULL),
+	(16, 'mcdonalds', 'steve', '22', NULL, 'affy9629', 0, '2023-02-15 02:30:00', NULL),
+	(17, 'bmw', 'jessica', '5', NULL, 'affy9629', 0, '2022-05-30 04:45:30', NULL),
+	(18, 'mercedes', 'matt', '13', NULL, 'affy9629', 0, '2023-11-10 06:15:20', NULL),
+	(19, 'sony', 'olivia', '17', NULL, 'affy9629', 0, '2022-08-20 10:00:45', NULL),
+	(20, 'nintendo', 'alex', '19', NULL, 'affy9629', 0, '2023-07-05 13:50:10', NULL),
+	(21, 'lg', 'ryan', '3', NULL, 'affy9629', 0, '2022-10-25 08:40:55', NULL),
+	(22, 'starbucks', 'jennifer', '16', NULL, 'affy9629', 0, '2024-03-02 04:10:30', NULL),
+	(23, 'facebook', 'eric', '21', NULL, 'affy9629', 0, '2023-04-15 12:30:00', NULL),
+	(24, 'ab', 'cd', '66', NULL, 'affy9629', 0, '2024-04-07 09:23:31', NULL),
+	(25, 'aaa', 'bbbbb', '55', NULL, 'affy9629', 0, '2024-04-07 09:24:36', NULL);
 
 -- Dumping structure for table management_1.companies
 DROP TABLE IF EXISTS `companies`;
@@ -60,12 +80,13 @@ CREATE TABLE IF NOT EXISTS `companies` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`company_id`),
   KEY `admins_company_name_index` (`company_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table management_1.companies: ~2 rows (approximately)
+-- Dumping data for table management_1.companies: ~3 rows (approximately)
 INSERT INTO `companies` (`company_id`, `company_name`, `user_name`, `user_id`, `email`, `password`, `mobile`, `usertype`, `status`, `is_delete`, `created_at`, `updated_at`) VALUES
 	(1, 'CRYPTO TECHNOCRAFT PRIVATE LIMITED', 'admin', 'affy9629', 'ahadkhalid117@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '07974857585', 0, 0, 0, NULL, NULL),
-	(3, 'GOOGLE', 'admin', 'affy1111', 'ahadkhalid118@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '9806734272', 0, 0, 0, NULL, NULL);
+	(3, 'GOOGLE', 'admin', 'affy1111', 'ahadkhalid118@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '9806734272', 0, 0, 0, NULL, NULL),
+	(4, 'CRYPTO TECHNOCRAFT PRIVATE LIMITED', 'admin', 'affy4769', 'ahadkhalid117@gmail.com', '6512bd43d9caa6e02c990b0a82652dca', '07974857585', 0, 0, 0, '2024-04-07 08:14:10', NULL);
 
 -- Dumping structure for table management_1.customers
 DROP TABLE IF EXISTS `customers`;
@@ -115,26 +136,49 @@ CREATE TABLE IF NOT EXISTS `customer_orders` (
 -- Dumping structure for table management_1.dealers
 DROP TABLE IF EXISTS `dealers`;
 CREATE TABLE IF NOT EXISTS `dealers` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `customer_id` bigint(20) unsigned NOT NULL,
-  `brand_id` bigint(20) unsigned NOT NULL,
-  `units` int(11) NOT NULL,
-  `vehicle_number` varchar(255) NOT NULL,
-  `company_id` bigint(20) unsigned DEFAULT NULL,
-  `company_idd` bigint(20) unsigned DEFAULT NULL,
-  `date` date NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `dealers_customer_id_foreign` (`customer_id`),
-  KEY `dealers_brand_id_foreign` (`brand_id`),
-  KEY `dealers_company_id_foreign` (`company_id`),
-  CONSTRAINT `dealers_brand_id_foreign` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
-  CONSTRAINT `dealers_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`),
-  CONSTRAINT `dealers_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `company_idd` varchar(50) NOT NULL,
+  `dealer_name` varchar(50) NOT NULL,
+  `dealer_no` varchar(50) DEFAULT NULL,
+  `status` int(11) DEFAULT 0,
+  `is_delete` int(11) DEFAULT 0,
+  `created_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table management_1.dealers: ~0 rows (approximately)
+-- Dumping data for table management_1.dealers: ~11 rows (approximately)
+INSERT INTO `dealers` (`id`, `company_idd`, `dealer_name`, `dealer_no`, `status`, `is_delete`, `created_date`) VALUES
+	(3, 'affy9629', 'ahadd', '9806734272', 0, 0, '2024-04-07 14:22:10'),
+	(5, 'affy9629', 'Jane Smith', '9876543210', 0, 0, '2024-04-07 14:22:10'),
+	(6, 'affy9629', 'Michael Johnson', '5555555555', 0, 0, '2024-04-07 14:22:10'),
+	(8, 'affy9629', 'David Wilson', '9999999999', 0, 0, '2024-04-07 14:22:10'),
+	(10, 'affy9629', 'James Miller', '2222222222', 0, 0, '2024-04-07 14:22:10'),
+	(12, 'affy9629', 'Daniel Anderson', '4444444444', 0, 0, '2024-04-07 14:22:10'),
+	(14, 'affy9629', 'Ethan Martinez', '6666666666', 0, 0, '2024-04-07 14:22:10'),
+	(16, 'affy9629', 'William Smith', '8888888888', 0, 0, '2024-04-07 14:22:10'),
+	(18, 'affy9629', 'Alexander Williams', '1010101010', 0, 0, '2024-04-07 14:22:10'),
+	(20, 'affy9629', 'Benjamin Wilson', '3030303030', 0, 0, '2024-04-07 14:22:10'),
+	(21, 'affy9629', 'khalid', '', 0, 0, '2024-04-07 14:53:06');
+
+-- Dumping structure for table management_1.dealers_orders
+DROP TABLE IF EXISTS `dealers_orders`;
+CREATE TABLE IF NOT EXISTS `dealers_orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `brand_idd` varchar(50) DEFAULT NULL,
+  `dealer_id` varchar(50) DEFAULT NULL,
+  `units` varchar(255) DEFAULT NULL,
+  `vehicle_number` varchar(255) DEFAULT NULL,
+  `company_idd` varchar(255) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `is_delete` tinyint(4) DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table management_1.dealers_orders: ~1 rows (approximately)
+INSERT INTO `dealers_orders` (`id`, `brand_idd`, `dealer_id`, `units`, `vehicle_number`, `company_idd`, `date`, `created_at`, `updated_at`, `is_delete`) VALUES
+	(3, '24,23,22', '3', 'Jama', '777777777', 'affy9629', '2024-04-07', '2024-04-07 15:13:10', '2024-04-07 15:37:17', 0);
 
 -- Dumping structure for table management_1.failed_jobs
 DROP TABLE IF EXISTS `failed_jobs`;

@@ -1,3 +1,5 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
   body {
     margin: 0;
@@ -76,18 +78,18 @@
   }
 </style>
 <title>Super Admin Login</title>
-<?php if (session()->has('success')) : ?>
-  <div class="alert alert-success">
-    <?= session('success') ?>
-  </div>
-<?php endif; ?>
-
-<?php if (session()->has('error')) : ?>
-  <div class="alert alert-danger">
-    <?= session('error') ?>
-  </div>
-<?php endif; ?>
 <div class="container">
+  <?php if (session()->has('success')) : ?>
+    <div class="alert alert-success">
+      <?= session('success') ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if (session()->has('error')) : ?>
+    <div class="alert alert-danger">
+      <?= session('error') ?>
+    </div>
+  <?php endif; ?>
   <div class="card">
     <h2>Company Login</h2>
     <form id="loginForm" method="post" action="<?php echo base_url(route_to('company-login')) ?>">

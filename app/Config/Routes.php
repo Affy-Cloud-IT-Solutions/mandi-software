@@ -42,6 +42,10 @@ $routes->group('/', ['filter' => 'FilterCompany'], function ($routes) {
     //DEALERS
     $routes->get('add-dealer', 'CompanyController::addDealer');
     $routes->get('dealer-list', 'CompanyController::dealerList');
+    $routes->post('dealer-report-save', 'CompanyController::dealerReportSave');
+    $routes->post('company-save-dealer', 'CompanyController::companySaveDealer');
+    $routes->post('company-update-dealer', 'CompanyController::companyUpdateDealer');
+    $routes->get('dealer-delete/(:num)', 'CompanyController::dealerDelete/$1');
 
     //USERS
 
