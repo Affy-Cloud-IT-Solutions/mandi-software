@@ -69,4 +69,5 @@ $routes->group('employee', ['filter' => 'FilterEmployee'], function ($routes) {
     $routes->get('add-dealer', 'EmployeeController::addDealer');
     $routes->get('customer-reports', 'EmployeeController::customerReport');
     $routes->get('dealer-reports', 'EmployeeController::dealerReport');
+    $routes->get('logout', 'EmployeeController::logout');
 });

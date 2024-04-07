@@ -59,4 +59,9 @@ class EmployeeController extends BaseController
     {
         return view('employee/dealer-reports');
     }
+    public function logout()
+    {
+        $this->session->destroy();
+        return redirect()->to(base_url("employee-login"));
+    }
 }
