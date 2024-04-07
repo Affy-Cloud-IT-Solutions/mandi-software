@@ -6,11 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Software</title>
     <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
-    <!-- <link rel="stylesheet" href="../assets/css/styles.min.css" /> -->
-    <link rel="stylesheet" href="<?= base_url() ?>/assets/css/styles.min.css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <link rel="stylesheet" href="../assets/css/styles.min.css" />
 </head>
 
 <style>
@@ -75,41 +71,23 @@
                             <span class="hide-menu">Crates</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="<?= base_url('employee/add-customer') ?>" aria-expanded="false">
+                            <a class="sidebar-link" href="//" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-pencil"></i>
                                 </span>
-                                <span class="hide-menu">Customer Form</span>
+                                <span class="hide-menu">Create Company</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="<?= base_url('employee/add-dealer') ?>" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-pencil"></i>
-                                </span>
-                                <span class="hide-menu">Dealer Form</span>
-                            </a>
-                        </li>
-                        <li class="nav-small-cap">
-                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                            <span class="hide-menu">Reports</span>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="<?= base_url('employee/customer-reports') ?>" aria-expanded="false">
+                            <a class="sidebar-link" href="//" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-article"></i>
                                 </span>
-                                <span class="hide-menu">Customer Reports</span>
+                                <span class="hide-menu">Company List</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="<?= base_url('employee/dealer-reports') ?>" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-article"></i>
-                                </span>
-                                <span class="hide-menu">Dealer Reports</span>
-                            </a>
-                        </li>
+                       
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

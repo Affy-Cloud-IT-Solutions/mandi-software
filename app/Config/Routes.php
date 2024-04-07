@@ -65,4 +65,9 @@ $routes->match(['get', 'post'], 'employee-login', 'EmployeeController::employeeL
 $routes->group('employee', ['filter' => 'FilterEmployee'], function ($routes) {
     $routes->get('/', 'EmployeeController::index');
     $routes->get('profile', 'EmployeeController::showProfile');
+    // $routes->get('profile', 'EmployeeController::showProfile');
+    $routes->get('add-customer', 'EmployeeController::addCustomer');
+    $routes->get('add-dealer', 'EmployeeController::addDealer');
+    $routes->get('customer-reports', 'EmployeeController::customerReport');
+    $routes->get('dealer-reports', 'EmployeeController::dealerReport');
 });
