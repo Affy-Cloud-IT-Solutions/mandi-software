@@ -7,6 +7,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\CompanyModel;
 use App\Models\UserModel;
 use App\Models\BrandModel;
+use App\Models\CustomerModel;
 
 class CompanyController extends BaseController
 {
@@ -92,6 +93,25 @@ class CompanyController extends BaseController
         return view('company/add-customer');
     }
 
+
+    public function saveCustomer(){
+        $companyUID = $_SESSION['companyUID'];
+    $data = [
+    'customerName' =>  $_POST['cutstomer_name'],
+    'phone' => $_POST['phone'],
+    'company_id' =>  $companyUID,
+    'created_at' => date('Y-m-d H:i:s'),
+    'is_delete' => false
+];
+    $dataInsert =  $this->CustomerModel->insert($data);
+    if ($customerModel->saveCustomer($data)) {
+    echo "Customer saved successfully!";
+} else {
+    echo "Failed to save customer!";
+}
+    }
+
+    
     public function customerList()
     {
         return view('company/customer-list');
