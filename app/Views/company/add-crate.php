@@ -22,16 +22,6 @@ require 'include/navbar.php';
                 <form action="<?= $formSave ?>" class="form-inputs" method="post">
                     <div class="container">
                         <div class="row">
-
-                            <!-- <div class="col-md-12 my-2">
-                        <label class="mb-2" for="profile"><b>Select Crate For</b></label>
-                        <br>
-                        <select class="py-2 w-100" name="crate_for" id="crate_for">
-                            <option value="" selected disabled>Select Crate For</option>
-                            <option value="Customer">Customer</option>
-                            <option value="Dealer">Dealer</option>
-                        </select>
-                        </div> -->
                             <div class="col-md-4 my-2">
                                 <label class="mb-2" for="crate_name"><b> Brand Name</b></label>
                                 <input class="form-control" type="text" id="brand_name" name="brand_name" placeholder="Brand Name" required>
