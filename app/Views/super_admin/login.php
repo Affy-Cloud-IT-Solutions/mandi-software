@@ -1,5 +1,6 @@
-
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<?php
+include 'include/links.php';
+?>
 
 
 <style>
@@ -81,12 +82,6 @@
 </style>
 <title>Super Admin Login</title>
 <div class="container">
-
-<?php if (session()->has('success')) : ?>
-  <div class="alert alert-success">
-    <?= session('success') ?>
-  </div>
-<?php endif; ?>
 
 <?php if (session()->has('error')){ ?>
   <div class="alert alert-danger" role="alert">

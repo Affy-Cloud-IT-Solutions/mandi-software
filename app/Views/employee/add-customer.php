@@ -1,7 +1,7 @@
 <?php
 require 'include/navbar.php';
 ?>
- <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
 <style>
     .form-inputs label {
         color: #000;
@@ -37,7 +37,7 @@ require 'include/navbar.php';
         float: right;
     }
 
-    .closeBtn{
+    .closeBtn {
         background-color: transparent !important;
         border: none !important;
         font-size: 20px;
@@ -45,6 +45,16 @@ require 'include/navbar.php';
 </style>
 
 <div class="container-fluid">
+    <!-- Display session message -->
+    <?php if (session()->has('success')) : ?>
+        <div class="alert alert-success" role="alert">
+            <?= session()->get('success') ?>
+        </div>
+    <?php elseif (session()->has('error')) : ?>
+        <div class="alert alert-danger" role="alert">
+            <?= session()->get('error') ?>
+        </div>
+    <?php endif; ?>
     <!--  Row 1 -->
     <div class="row">
         <div class="col-lg-12">
@@ -88,7 +98,7 @@ require 'include/navbar.php';
                             </div>
                             <div class="col-md-3 my-2">
                                 <label class="mb-2" for="crate_name"><b>Select Date</b></label>
-                               <input class="form-control" type="date">
+                                <input class="form-control" type="date">
                             </div>
                             <div class="col-md-12">
 
@@ -144,72 +154,79 @@ require 'include/navbar.php';
 
 <!-- New Customer Modal -->
 <div class="modal fade" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="addCustomerLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="mb-0">Add New Customer</h5>
-        <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form id="myForm">
-            <div class="row">
-                <div class="col-md-6 my-2">
-                    <label for="name">Name:</label>
-                    <input class="form-control" type="text" id="name" name="name" required>
-                </div>
-                <div class="col-md-6 my-2">
-                    <label for="mobile">Mobile:</label>
-                    <input class="form-control" type="text" id="mobile" name="mobile" required>
-                </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="mb-0">Add New Customer</h5>
+                <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <button class="btn btn-primary">Add Customer</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary">Add</button> -->
-      </div>
+            <div class="modal-body">
+                <form id="myForm" action="<?= site_url('employee/save-customer') ?>" method="post">
+                    <div class="row">
+                        <div class="col-md-6 my-2">
+                            <label for="name">Name:</label>
+                            <input class="form-control" type="text" id="name" name="name" required>
+
+                            <?php if (session()->has('errors')) : ?>
+                                <?php $errors = session('errors'); ?>
+                                <?php if (isset($errors['name'])) : ?>
+                                    <p class="error text-danger "><?= esc($errors['name']) ?></p>
+                                <?php endif ?>
+                            <?php endif ?>
+
+                        </div>
+                        <div class="col-md-6 my-2">
+                            <label for="mobile">Mobile:</label>
+                            <input class="form-control" type="text" id="mobile" name="mobile" required>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Add Customer</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Add</button> -->
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- New Brand Modal -->
 <div class="modal fade" id="addBrand" tabindex="-1" role="dialog" aria-labelledby="addBrandLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="mb-0">Add New Brand</h5>
-        <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form id="myForm">
-            <div class="row">
-                <div class="col-md-12 my-2">
-                    <label class="mb-2" for="crate_name"><b> Brand Name</b></label>
-                    <input class="form-control" type="text" id="crate_name" name="crate_name" placeholder="Brand Name">
-                </div>
-                <div class="col-md-12 my-2">
-                    <label class="mb-2" for="crate_name"><b> Owner Name</b></label>
-                    <input class="form-control" type="text" id="crate_name" name="crate_name" placeholder="Owner Name">
-                </div>
-                <div class="col-md-12 my-2">
-                    <label class="mb-2" for="crate_name"><b> Number of Crates</b></label>
-                    <input class="form-control" type="text" id="crate_name" name="crate_name"
-                        placeholder="Number of Crates">
-                </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="mb-0">Add New Brand</h5>
+                <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <button class="btn btn-primary">Add Crate</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+            <div class="modal-body">
+                <form id="myForm">
+                    <div class="row">
+                        <div class="col-md-12 my-2">
+                            <label class="mb-2" for="crate_name"><b> Brand Name</b></label>
+                            <input class="form-control" type="text" id="crate_name" name="crate_name" placeholder="Brand Name">
+                        </div>
+                        <div class="col-md-12 my-2">
+                            <label class="mb-2" for="crate_name"><b> Owner Name</b></label>
+                            <input class="form-control" type="text" id="crate_name" name="crate_name" placeholder="Owner Name">
+                        </div>
+                        <div class="col-md-12 my-2">
+                            <label class="mb-2" for="crate_name"><b> Number of Crates</b></label>
+                            <input class="form-control" type="text" id="crate_name" name="crate_name" placeholder="Number of Crates">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Add Crate</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
