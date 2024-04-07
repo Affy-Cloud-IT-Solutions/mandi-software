@@ -67,6 +67,7 @@ require 'include/navbar.php';
         background-color: #ffc107;
         color: #212529;
     }
+
     .closeBtn {
         background-color: transparent !important;
         border: none !important;
@@ -79,10 +80,10 @@ require 'include/navbar.php';
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
-            <div class="my-3 d-flex justify-content-between">
+                <div class="my-3 d-flex justify-content-between">
                     <h3 class="text-center">Customers</h3>
                     <button class="btn btn-primary" data-toggle="modal" data-target="#addNewCustomer">Add New
-                    Customer</button>
+                        Customer</button>
                 </div>
 
                 <div class="container">

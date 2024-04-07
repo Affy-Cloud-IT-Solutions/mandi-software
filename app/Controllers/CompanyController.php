@@ -154,9 +154,11 @@ class CompanyController extends BaseController
 
     public function userList()
     {
+        $formSave = base_url() . 'save-data-user';
+        $title = 'Add User';
         $companyUID = $_SESSION['companyUID'];
         $userList = $this->UserModel->select('*')->where(['is_delete' => '0', 'company_idd' => $companyUID])->orderBy('id', 'desc')->get()->getResult();
-        return view('company/user-list', compact("userList"));
+        return view('company/user-list', compact("userList", "formSave", "title"));
     }
 
 

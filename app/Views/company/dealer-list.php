@@ -83,7 +83,7 @@ require 'include/navbar.php';
                 <div class="my-3 d-flex justify-content-between">
                     <h3 class="text-center">Dealer List</h3>
                     <button class="btn btn-primary" data-toggle="modal" data-target="#addNewDealer">Add New
-                    Dealer</button>
+                        Dealer</button>
                 </div>
 
                 <div class="container">
