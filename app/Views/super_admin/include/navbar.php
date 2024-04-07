@@ -133,7 +133,7 @@
                                 </a> -->
                                         <a href="<?= base_url('super-admin/profile') ?>"
                                             class="btn btn-outline-success mx-3 mt-2 d-block">Profile</a>
-                                        <a href="<?= base_url('super-admin/login') ?>"
+                                        <a href="<?= base_url('super-admin-logout') ?>"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                                     </div>
                                 </div>

@@ -1,7 +1,7 @@
 <?php
 require 'include/navbar.php';
 ?>
- <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
 <style>
     .form-inputs label {
         color: #000;
@@ -37,7 +37,7 @@ require 'include/navbar.php';
         float: right;
     }
 
-    .closeBtn{
+    .closeBtn {
         background-color: transparent !important;
         border: none !important;
         font-size: 20px;
@@ -49,7 +49,7 @@ require 'include/navbar.php';
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
-                <h1 class="text-center">Add Customer</h1>
+                <h1 class="text-center">Customer Form</h1>
 
                 <form action="" class="form-inputs">
                     <div class="container">
@@ -62,7 +62,8 @@ require 'include/navbar.php';
                                     <option value="Customer">Customer 2</option>
                                     <option value="Customer">Customer 3</option>
                                 </select>
-                                <button type="button" class="btn addbtn my-2 p-1" data-toggle="modal" data-target="#addCustomer">+Add</button>
+                                <button type="button" class="btn addbtn my-2 p-1" data-toggle="modal"
+                                    data-target="#addCustomer">+Add</button>
                             </div>
                             <div class="col-md-3 my-2">
                                 <label class="mb-2" for="crate_name"><b> Crate Brand</b></label>
@@ -75,7 +76,8 @@ require 'include/navbar.php';
                                     <option value="Customer">Crate 4</option>
                                     <option value="Customer">Crate 5</option>
                                 </select>
-                                <button type="button" class="btn addbtn my-2 p-1" data-toggle="modal" data-target="#addBrand">+Add</button>
+                                <button type="button" class="btn addbtn my-2 p-1" data-toggle="modal"
+                                    data-target="#addBrand">+Add</button>
 
                             </div>
                             <div class="col-md-3 my-2">
@@ -88,7 +90,7 @@ require 'include/navbar.php';
                             </div>
                             <div class="col-md-3 my-2">
                                 <label class="mb-2" for="crate_name"><b>Select Date</b></label>
-                               <input class="form-control" type="date">
+                                <input class="form-control" type="date">
                             </div>
                             <div class="col-md-12">
 
@@ -143,73 +145,80 @@ require 'include/navbar.php';
 
 
 <!-- New Customer Modal -->
-<div class="modal fade" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="addCustomerLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="mb-0">Add New Customer</h5>
-        <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form id="myForm">
-            <div class="row">
-                <div class="col-md-6 my-2">
-                    <label for="name">Name:</label>
-                    <input class="form-control" type="text" id="name" name="name" required>
-                </div>
-                <div class="col-md-6 my-2">
-                    <label for="mobile">Mobile:</label>
-                    <input class="form-control" type="text" id="mobile" name="mobile" required>
-                </div>
+<div class="modal fade" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="addCustomerLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="mb-0">Add New Customer</h5>
+                <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <button class="btn btn-primary">Add Customer</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary">Add</button> -->
-      </div>
+            <div class="modal-body">
+                <form id="myForm">
+                    <div class="row">
+                        <div class="col-md-6 my-2">
+                            <label for="name">Name:</label>
+                            <input class="form-control" type="text" id="name" name="name" required>
+                        </div>
+                        <div class="col-md-6 my-2">
+                            <label for="mobile">Mobile:</label>
+                            <input class="form-control" type="text" id="mobile" name="mobile" required>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Add Customer</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Add</button> -->
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- New Brand Modal -->
 <div class="modal fade" id="addBrand" tabindex="-1" role="dialog" aria-labelledby="addBrandLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="mb-0">Add New Brand</h5>
-        <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form id="myForm">
-            <div class="row">
-                <div class="col-md-12 my-2">
-                    <label class="mb-2" for="crate_name"><b> Brand Name</b></label>
-                    <input class="form-control" type="text" id="crate_name" name="crate_name" placeholder="Brand Name">
-                </div>
-                <div class="col-md-12 my-2">
-                    <label class="mb-2" for="crate_name"><b> Owner Name</b></label>
-                    <input class="form-control" type="text" id="crate_name" name="crate_name" placeholder="Owner Name">
-                </div>
-                <div class="col-md-12 my-2">
-                    <label class="mb-2" for="crate_name"><b> Number of Crates</b></label>
-                    <input class="form-control" type="text" id="crate_name" name="crate_name"
-                        placeholder="Number of Crates">
-                </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="mb-0">Add New Brand</h5>
+                <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <button class="btn btn-primary">Add Crate</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+            <div class="modal-body">
+                <form action="" class="form-inputs" method="post">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 my-2">
+                                <label class="mb-2" for="crate_name"><b> Brand Name</b></label>
+                                <input class="form-control" type="text" id="brand_name" name="brand_name"
+                                    placeholder="Brand Name" required>
+                            </div>
+                            <div class="col-md-4 my-2">
+                                <label class="mb-2" for="crate_name"><b> Owner Name</b></label>
+                                <input class="form-control" type="text" id="owner_name" name="owner_name"
+                                    placeholder="Owner Name" required>
+                            </div>
+                            <div class="col-md-4 my-2">
+                                <label class="mb-2" for="crate_name"><b> Number of Crates</b></label>
+                                <input class="form-control" type="text" id="no_crate" name="no_crate"
+                                    placeholder="Number of Crates" required>
+                            </div>
+                            <div class="col-md-12 my-2">
+                                <button class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

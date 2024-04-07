@@ -1,7 +1,6 @@
 <?php
 require 'include/navbar.php';
 ?>
- <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
 <style>
     .form-inputs label {
         color: #000;
@@ -49,7 +48,7 @@ require 'include/navbar.php';
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
-                <h1 class="text-center">Add Dealer</h1>
+                <h1 class="text-center">Dealer Form</h1>
 
                 <form action="" class="form-inputs">
                     <div class="container">
