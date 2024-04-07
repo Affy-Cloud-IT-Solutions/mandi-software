@@ -67,6 +67,12 @@ require 'include/navbar.php';
         background-color: #ffc107;
         color: #212529;
     }
+
+    .closeBtn {
+        background-color: transparent !important;
+        border: none !important;
+        font-size: 20px;
+    }
 </style>
 
 <div class="container-fluid">
@@ -74,7 +80,11 @@ require 'include/navbar.php';
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
-                <h1 class="text-center">User List</h1>
+            <div class="my-3 d-flex justify-content-between">
+                    <h3 class="text-center">Users</h3>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#addNewUser">Add New
+                        User</button>
+                </div>
 
                 <div class="container">
                     <div class="row">
@@ -128,7 +138,77 @@ require 'include/navbar.php';
         </div>
     </div>
 
+    <div class="modal fade" id="addNewUser" tabindex="-1" role="dialog" aria-labelledby="addNewUserLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addNewUserLabel">Add New User</h5>
+                <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form action="<?= $formSave ?>" class="form-inputs" method="post">
+                    <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+                    <input type="hidden" name="id" value="<?= $userData->id ?? '' ?>">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 my-2">
+                                <label class="mb-2" for="crate_name"><b> User Type</b></label>
+                                <select class="form-control w-100" name="select_type" id="" required>
+                                    <option value="" selected disabled>Select User Type</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="user" selected>User</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 my-2">
+                                <label class="mb-2" for="crate_name"><b> Username</b></label>
+                                <input class="form-control" type="text" name="user_name" placeholder="Enter Username" value="<?= $userData->name ?? '' ?>" required>
+                            </div>
+                            <div class=" col-md-6 my-2">
+                                <label class="mb-2" for="crate_name"><b> Mobile</b></label>
+                                <input class="form-control" type="text" name="mobile" placeholder="Enter Mobile" value="<?= $userData->mobile ?? '' ?>" required>
+                            </div>
+                            <div class=" col-md-6 my-2">
+                                <label class="mb-2" for="crate_name"><b> Email</b></label>
+                                <input class="form-control" type="email" name="email" placeholder="Enter Email" value="<?= $userData->email ?? '' ?>" required>
+                            </div>
+                            <div class="col-md-6 my-2">
+                                <label class="mb-2" for="crate_name"><b>Password</b></label>&nbsp;
+                                <?php
+                                $hidden = 'hidden';
+                                if (isset($showPassword)) {
+                                    $hidden = "";
+                                }
+                                $checked = "";
+                                $disabled = "";
+                                if (isset($userData->password)) {
+                                    $checked = "checked";
+                                    $disabled = "disabled";
+                                }
+                                ?>
+                                <input type="checkbox" id="show_password_checkbox" <?= $hidden, $checked ?> onclick="showPassword()">
+                                <input class="form-control" type="text" name="password" id="password" placeholder="Enter Password" <?= $checked . ' ' . $disabled ?>>
+                            </div>
+                            <div class="col-md-6 my-2">
+                                <label class="mb-2" for="crate_name"><b>Confirm Password</b></label>
+                                <input class="form-control" type="text" id="repassword" placeholder="Confirm Password" <?= $checked . ' ' . $disabled ?>>
+                            </div>
 
+                            <div class="col-md-12 my-2">
+                                <button class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 <?php
 require 'include/footer.php';
