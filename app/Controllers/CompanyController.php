@@ -7,18 +7,28 @@ use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\CompanyModel;
 use App\Models\UserModel;
 use App\Models\BrandModel;
+<<<<<<< HEAD
+use App\Models\CustomerModel;
+=======
+use App\Models\DealerModel;
+use App\Models\DealerReportModel;
+>>>>>>> 31049c468b1c0f875da50cc786721ac19a268c7b
 
 class CompanyController extends BaseController
 {
     protected $CompanyModel;
     protected $UserModel;
     protected $BrandModel;
+    protected $DealerModel;
+    protected $DealerReportModel;
 
     public function __construct()
     {
         $this->CompanyModel = new CompanyModel();
         $this->UserModel = new UserModel();
         $this->BrandModel = new BrandModel();
+        $this->DealerModel = new DealerModel();
+        $this->DealerReportModel = new DealerReportModel();
     }
     public function index()
     {
@@ -30,12 +40,15 @@ class CompanyController extends BaseController
         $username = filter_input(INPUT_POST, 'username', FILTER_VALIDATE_EMAIL);
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-        if ($email && $password && $row = $this->CompanyModel->select('*')->where(['is_delete' => 0, 'status' => 0, 'user_id' => $username, 'email' => $email, 'password' => md5($password)])->get()->getRow()) {
-            $sessionData = ['companyId' => $row->company_id, 'companyUID' => $row->user_id, 'companyName' => $row->company_name, 'userName' => $row->user_name, 'mobile' => $row->mobile, 'email' => $row->email];
-            $this->session->set($sessionData);
-            return $this->session->has('companyId') ? redirect()->to(base_url("company")) : $this->session->setFlashdata('message', 'User is Invalid. Please try again.');
-        } else {
-            $this->session->setFlashdata('message', 'Invalid email or password format.');
+        if ($email && $password) {
+            if ($row = $this->CompanyModel->select('*')->where(['is_delete' => 0, 'status' => 0, 'user_id' => $username, 'email' => $email, 'password' => md5($password)])->get()->getRow()) {
+                $sessionData = ['companyId' => $row->company_id, 'companyUID' => $row->user_id, 'companyName' => $row->company_name, 'userName' => $row->user_name, 'mobile' => $row->mobile, 'email' => $row->email];
+                $this->session->set($sessionData);
+                $this->session->setFlashdata('success', 'Successfully Login');
+                return redirect()->to(base_url("company"));
+            } else {
+                $this->session->setFlashdata('error', 'Invalid email or password format.');
+            }
         }
         return view('company/login');
     }
@@ -52,7 +65,7 @@ class CompanyController extends BaseController
         $formSave = base_url() . "save-crate";
         return view('company/add-crate', compact("title", "formSave"));
     }
-    
+
     public function saveCrate()
     {
         $companyUID = $_SESSION['companyUID'];
@@ -95,6 +108,25 @@ class CompanyController extends BaseController
         return view('company/add-customer');
     }
 
+
+    public function saveCustomer(){
+        $companyUID = $_SESSION['companyUID'];
+    $data = [
+    'customerName' =>  $_POST['cutstomer_name'],
+    'phone' => $_POST['phone'],
+    'company_id' =>  $companyUID,
+    'created_at' => date('Y-m-d H:i:s'),
+    'is_delete' => false
+];
+    $dataInsert =  $this->CustomerModel->insert($data);
+    if ($customerModel->saveCustomer($data)) {
+    echo "Customer saved successfully!";
+} else {
+    echo "Failed to save customer!";
+}
+    }
+
+    
     public function customerList()
     {
         return view('company/customer-list');
@@ -103,12 +135,82 @@ class CompanyController extends BaseController
     //DEALERS
     public function addDealer()
     {
-        return view('company/add-dealer');
+        $companyUID = $_SESSION['companyUID'];
+        $dealerList = $this->DealerModel->select('*')->where(['is_delete' => '0', 'company_idd' => $companyUID])->orderBy('id', 'desc')->get()->getResult();
+        $userList = $this->BrandModel->select('*')->where(['is_delete' => '0', 'company_idd' => $companyUID])->orderBy('id', 'desc')->get()->getResult();
+        return view('company/add-dealer', compact('userList', 'dealerList'));
     }
 
+    public function companySaveDealer()
+    {
+        $companyUID = $_SESSION['companyUID'];
+        $dataKeyValue = [
+            'dealer_name' => $_POST['name'],
+            'dealer_no' => $_POST['mobile'],
+            'company_idd' => $companyUID,
+            'created_date' => date('Y-m-d H:i:s'),
+        ];
+        $dataInsert =  $this->DealerModel->insert($dataKeyValue);
+        if ($dataInsert) {
+            $this->session->setFlashdata('success', 'Dealer Successfully Insert');
+            return redirect()->to(base_url("dealer-list"));
+        } else {
+            $this->session->setFlashdata('error', 'Something Went Wrong');
+            return redirect()->to(base_url("dealer-list"));
+        }
+    }
+    public function companyUpdateDealer()
+    {
+        $dealer_id  = $_POST['id'];
+        $dataKeyValue = [
+            'dealer_name' => $_POST['name'],
+            'dealer_no' => $_POST['mobile'],
+        ];
+        $dataInsert =  $this->DealerModel->set($dataKeyValue)->where("id", $dealer_id)->update();
+        if ($dataInsert) {
+            $this->session->setFlashdata('success', 'Dealer Successfully Update');
+            return redirect()->to(base_url("dealer-list"));
+        } else {
+            $this->session->setFlashdata('error', 'Something Went Wrong');
+            return redirect()->to(base_url("dealer-list"));
+        }
+    }
+
+
+    public function dealerReportSave()
+    {
+        $companyUID = $_SESSION['companyUID'];
+        $crate_brand = implode(',', $_POST['crate_brand']);
+        $dataKeyValue = [
+            'units' => $_POST['select_unit'],
+            'dealer_id' => $_POST['dealername'],
+            'brand_idd' => $crate_brand,
+            'vehicle_number' => $_POST['vechile_no'],
+            'date' => $_POST['date'],
+            'company_idd' => $companyUID,
+            'created_at' => date('Y-m-d H:i:s'),
+        ];
+        $dataInsert =  $this->DealerReportModel->insert($dataKeyValue);
+        if ($dataInsert) {
+            $this->session->setFlashdata('success', 'Dealer Successfully Insert');
+            return redirect()->to(base_url("add-dealer"));
+        } else {
+            $this->session->setFlashdata('error', 'Something Went Wrong');
+            return redirect()->to(base_url("add-dealer"));
+        }
+    }
     public function dealerList()
     {
-        return view('company/dealer-list');
+        $companyUID = $_SESSION['companyUID'];
+        $userList = $this->DealerModel->select('*')->where(['is_delete' => '0', 'company_idd' => $companyUID])->orderBy('id', 'desc')->get()->getResult();
+        return view('company/dealer-list', compact('userList'));
+    }
+
+    public function dealerDelete($id)
+    {
+        $this->DealerModel->set('is_delete', 1)->where('id', $id)->update();
+        $this->session->setFlashdata('success', 'Dealer Successfully Deleted');
+        return redirect()->to(base_url("dealer-list"));
     }
 
     //USERS
@@ -176,7 +278,9 @@ class CompanyController extends BaseController
 
     public function showDealer()
     {
-        return view('company/dealer-reports');
+        $companyUID = $_SESSION['companyUID'];
+        $DealerReport = $this->DealerReportModel->select('*')->where(['is_delete' => '0', 'company_idd' => $companyUID])->orderBy('id', 'desc')->get()->getResult();
+        return view('company/dealer-reports', compact('DealerReport'));
     }
 
     public function ActiveDeative($id, $flag)

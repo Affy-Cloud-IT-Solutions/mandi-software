@@ -28,14 +28,15 @@ class SuperAdminController extends BaseController
     {
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-        if ($email && $password && $row = $this->superAdminModel->select('*')->where(['email' => $email, 'password' => md5($password)])->get()->getRow()) {
-            $sessionData = ['au_id' => $row->id, 'companyName' => $row->companyName, 'userName' => $row->userName, 'mobile' => $row->mobile, 'email' => $row->email];
-            $this->session->set($sessionData);
-            $this->session->setFlashdata('success', 'Successfully Login');
-            return redirect()->to(base_url("super-admin"));
-        } else {
-            $this->session->setFlashdata('error', 'Invalid email or password format.');
-            // return redirect()->to(base_url(""));
+        if ($email && $password) {
+            if ($row = $this->superAdminModel->select('*')->where(['email' => $email, 'password' => md5($password)])->get()->getRow()) {
+                $sessionData = ['au_id' => $row->id, 'companyName' => $row->companyName, 'userName' => $row->userName, 'mobile' => $row->mobile, 'email' => $row->email];
+                $this->session->set($sessionData);
+                $this->session->setFlashdata('success', 'Successfully Login');
+                return redirect()->to(base_url("super-admin"));
+            } else {
+                $this->session->setFlashdata('error', 'Invalid email or password format.');
+            }
         }
         return view('super_admin/login');
     }
@@ -105,10 +106,10 @@ class SuperAdminController extends BaseController
     {
         $this->CompanyModel->set('status', $flag)->where('company_id', $id)->update();
         if ($flag == 0) {
-            $this->session->setFlashdata('error', 'Company Successfully Deactive');
+            $this->session->setFlashdata('success', 'Company Successfully Active');
             return redirect()->to(base_url("company-list"));
         } else {
-            $this->session->setFlashdata('success', 'Company Successfully Active');
+            $this->session->setFlashdata('error', 'Company Successfully Deactive');
             return redirect()->to(base_url("company-list"));
         }
     }

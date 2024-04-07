@@ -76,13 +76,25 @@ require 'include/navbar.php';
 </style>
 
 <div class="container-fluid">
+
+    <?php if (session()->has('success')) : ?>
+        <div class="alert alert-success">
+            <?= session('success') ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->has('error')) : ?>
+        <div class="alert alert-danger">
+            <?= session('error') ?>
+        </div>
+    <?php endif; ?>
     <!--  Row 1 -->
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
                 <div class="my-3 d-flex justify-content-between">
                     <h3 class="text-center">Dealer List</h3>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#addNewDealer">Add New
+                    <button class="btn btn-primary btn_click" data-toggle="modal" data-target="#addNewDealer">Add New
                         Dealer</button>
                 </div>
 
@@ -98,13 +110,18 @@ require 'include/navbar.php';
                                     <th>Action</th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Arsalan</td>
-                                        <td>9876543210</td>
-                                        <td>28/03/2024</td>
-                                        <td><i class="ti ti-pencil"></i></td>
-                                    </tr>
+                                    <?php foreach ($userList as $key => $row) { ?>
+                                        <tr>
+                                            <td><?= ++$key ?></td>
+                                            <td><?= $row->dealer_name ?></td>
+                                            <td><?= $row->dealer_no ?></td>
+                                            <td><?= date('d-m-Y', strtotime($row->created_date)) ?></td>
+                                            <td>
+                                                <a href="#>" title="Edit" onclick="editDealer('<?= $row->id ?>','<?= $row->dealer_name ?>','<?= $row->dealer_no ?>')"><i style="cursor:pointer;" class="ti ti-pencil"></i></a>
+                                                <a href="<?php echo base_url("dealer-delete/$row->id"); ?>" title="Delete"><i onclick="return confirm('Are you sure you want to Delete this dealer?')" style="cursor:pointer; color:red" class="ti ti-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -126,18 +143,17 @@ require 'include/navbar.php';
 
 </div>
 
-<div class="modal fade" id="addNewDealer" tabindex="-1" role="dialog" aria-labelledby="addNewDealerLabel"
-    aria-hidden="true">
+<div class="modal fade" id="addNewDealer" tabindex="-1" role="dialog" aria-labelledby="addNewDealerLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addNewDealerLabel">Add New Dealer</h5>
+                <h5 class="modal-title change_heading" id="addNewDealerLabel">Add New Dealer</h5>
                 <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="myForm">
+                <form id="myForm" action="<?php echo base_url('company-save-dealer'); ?>" method="post">
                     <div class="row">
                         <div class="col-md-6 my-2">
                             <label for="name">Name:</label>
@@ -145,10 +161,11 @@ require 'include/navbar.php';
                         </div>
                         <div class="col-md-6 my-2">
                             <label for="mobile">Mobile:</label>
-                            <input class="form-control" type="text" id="mobile" name="mobile" required>
+                            <input class="form-control mobile_no" type="text" id="mobile" name="mobile" maxlength="10">
                         </div>
                     </div>
-                    <button class="btn btn-primary">Add Dealer</button>
+                    <input class="" type="hidden" id="id" name="id">
+                    <button class="btn btn-primary change_name" type="submit">Add Dealer</button>
                 </form>
                 <hr>
                 <h4 class="text-center">or</h4>
@@ -157,8 +174,7 @@ require 'include/navbar.php';
                     <div class="col-md-12 my-2">
                         <label class="mb-2" for="crate_bulk"><b> Bulk Upload</b></label>
                         <br>
-                        <input class="form-control" type="file" id="crate_bulk" name="crate_bulk"
-                            placeholder="Number of Crates" required>
+                        <input class="form-control" type="file" id="crate_bulk" name="crate_bulk" placeholder="Number of Crates" required>
                     </div>
                     <button class="btn btn-success">Upload</button>
                 </form>
@@ -172,3 +188,22 @@ require 'include/navbar.php';
 <?php
 require 'include/footer.php';
 ?>
+<script>
+    $('.mobile_no').on('keypress', function(event) {
+        var charCode = event.which ? event.which : event.keyCode;
+        // Allow only numeric keys (0-9) and backspace (8) key
+        if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 8) {
+            event.preventDefault();
+        }
+    });
+
+    function editDealer(id, name, no) {
+        $('#myForm').attr('action', '<?php echo base_url('company-update-dealer'); ?>');
+        $("#id").val(id);
+        $("#name").val(name);
+        $("#mobile").val(no);
+        $(".change_heading").html("Edit Dealer");
+        $(".change_name").html("Update");
+        $(".btn_click").click();
+    }
+</script>
