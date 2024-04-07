@@ -6,6 +6,7 @@
         $('#crate_for').select2();
         $('#dealername').select2();
         $('#select_unit').select2();
+        
     });
 </script>
 
