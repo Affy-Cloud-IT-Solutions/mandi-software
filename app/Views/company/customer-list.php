@@ -67,6 +67,11 @@ require 'include/navbar.php';
         background-color: #ffc107;
         color: #212529;
     }
+    .closeBtn {
+        background-color: transparent !important;
+        border: none !important;
+        font-size: 20px;
+    }
 </style>
 
 <div class="container-fluid">
@@ -74,7 +79,11 @@ require 'include/navbar.php';
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
-                <h1 class="text-center">Customer List</h1>
+            <div class="my-3 d-flex justify-content-between">
+                    <h3 class="text-center">Customers</h3>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#addNewCustomer">Add New
+                    Customer</button>
+                </div>
 
                 <div class="container">
                     <div class="row">
@@ -112,6 +121,50 @@ require 'include/navbar.php';
     </div>
 
 
+</div>
+
+<div class="modal fade" id="addNewCustomer" tabindex="-1" role="dialog" aria-labelledby="addNewCustomerLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addNewCustomerLabel">Add New Customer</h5>
+                <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myForm">
+                    <div class="row">
+                        <div class="col-md-6 my-2">
+                            <label for="name">Name:</label>
+                            <input class="form-control" type="text" id="name" name="name" required>
+                        </div>
+                        <div class="col-md-6 my-2">
+                            <label for="mobile">Mobile:</label>
+                            <input class="form-control" type="text" id="mobile" name="mobile" required>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Add Customer</button>
+                </form>
+                <hr>
+                <h4 class="text-center">or</h4>
+                <hr>
+                <form action="">
+                    <div class="col-md-12 my-2">
+                        <label class="mb-2" for="crate_bulk"><b> Bulk Upload</b></label>
+                        <br>
+                        <input class="form-control" type="file" id="crate_bulk" name="crate_bulk"
+                            placeholder="Number of Crates" required>
+                    </div>
+                    <button class="btn btn-success">Upload</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 <?php
 require 'include/footer.php';

@@ -48,7 +48,7 @@ require 'include/navbar.php';
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
-                <h1 class="text-center">Add Dealer</h1>
+                <h1 class="text-center">Dealer Form</h1>
 
                 <form action="" class="form-inputs">
                     <div class="container">

@@ -31,9 +31,11 @@ class SuperAdminController extends BaseController
         if ($email && $password && $row = $this->superAdminModel->select('*')->where(['email' => $email, 'password' => md5($password)])->get()->getRow()) {
             $sessionData = ['au_id' => $row->id, 'companyName' => $row->companyName, 'userName' => $row->userName, 'mobile' => $row->mobile, 'email' => $row->email];
             $this->session->set($sessionData);
-            return $this->session->has('au_id') ? redirect()->to(base_url("super-admin")) : $this->session->setFlashdata('message', 'User is Invalid. Please try again.');
+            $this->session->setFlashdata('success', 'Successfully Login');
+            return redirect()->to(base_url("super-admin"));
         } else {
-            $this->session->setFlashdata('message', 'Invalid email or password format.');
+            $this->session->setFlashdata('error', 'Invalid email or password format.');
+            // return redirect()->to(base_url(""));
         }
         return view('super_admin/login');
     }
@@ -103,7 +105,7 @@ class SuperAdminController extends BaseController
     {
         $this->CompanyModel->set('status', $flag)->where('company_id', $id)->update();
         if ($flag == 0) {
-            $this->session->setFlashdata('success', 'Company Successfully Deactive');
+            $this->session->setFlashdata('error', 'Company Successfully Deactive');
             return redirect()->to(base_url("company-list"));
         } else {
             $this->session->setFlashdata('success', 'Company Successfully Active');
@@ -113,7 +115,7 @@ class SuperAdminController extends BaseController
     public function companyDelete($id)
     {
         $this->CompanyModel->set('is_delete', 1)->where('company_id', $id)->update();
-        $this->session->setFlashdata('success', 'Company Successfully Deleted');
+        $this->session->setFlashdata('error', 'Company Successfully Deleted');
         return redirect()->to(base_url("company-list"));
     }
 

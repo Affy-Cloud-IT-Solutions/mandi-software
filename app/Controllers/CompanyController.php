@@ -53,6 +53,7 @@ class CompanyController extends BaseController
         $formSave = base_url() . "save-crate";
         return view('company/add-crate', compact("title", "formSave"));
     }
+    
     public function saveCrate()
     {
         $companyUID = $_SESSION['companyUID'];
@@ -82,9 +83,11 @@ class CompanyController extends BaseController
 
     public function crateList()
     {
+        $title = "Add Brand";
+        $formSave = base_url() . "save-crate";
         $companyUID = $_SESSION['companyUID'];
         $brandList = $this->BrandModel->select('*')->where(['is_delete' => '0', 'company_idd' => $companyUID])->orderBy('id', 'desc')->get()->getResult();
-        return view('company/crate-list', compact("brandList"));
+        return view('company/crate-list', compact("brandList", "title", "formSave"));
     }
 
     //CUTOMERS

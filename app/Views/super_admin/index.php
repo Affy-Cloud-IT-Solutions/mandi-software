@@ -1,9 +1,10 @@
 <?php
 require 'include/navbar.php';
-// require APPPATH . 'Views/include/navbar.php';
+
 ?>
 
 <div class="container-fluid">
+
     <!--  Row 1 -->
     <div class="row">
         <div class="col-lg-8 d-flex align-items-strech">

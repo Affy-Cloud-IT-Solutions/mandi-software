@@ -68,7 +68,7 @@ require 'include/navbar.php';
         color: #212529;
     }
 
-    .closeBtn{
+    .closeBtn {
         background-color: transparent !important;
         border: none !important;
         font-size: 20px;
@@ -82,7 +82,7 @@ require 'include/navbar.php';
             <div class="row">
                 <div class="my-3 d-flex justify-content-between">
                     <h3 class="text-center">Brand List</h3>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add New
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#addCrateModalModal">Add New
                         Brand</button>
                 </div>
                 <div class="container">
@@ -127,22 +127,56 @@ require 'include/navbar.php';
 
     <!-- Modal Add Brand -->
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="addCrateModalModal" tabindex="-1" role="dialog" aria-labelledby="addCrateModalModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add New Brand</h5>
+                    <h5 class="modal-title" id="addCrateModalModalLabel">Add New Brand</h5>
                     <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form action="<?= $formSave ?>" class="form-inputs" method="post">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4 my-2">
+                                    <label class="mb-2" for="crate_name"><b> Brand Name</b></label>
+                                    <input class="form-control" type="text" id="brand_name" name="brand_name"
+                                        placeholder="Brand Name" required>
+                                </div>
+                                <div class="col-md-4 my-2">
+                                    <label class="mb-2" for="crate_name"><b> Owner Name</b></label>
+                                    <input class="form-control" type="text" id="owner_name" name="owner_name"
+                                        placeholder="Owner Name" required>
+                                </div>
+                                <div class="col-md-4 my-2">
+                                    <label class="mb-2" for="crate_name"><b> Number of Crates</b></label>
+                                    <input class="form-control" type="text" id="no_crate" name="no_crate"
+                                        placeholder="Number of Crates" required>
+                                </div>
+                                <div class="col-md-12 my-2">
+                                    <button class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                    <h4 class="text-center">or</h4>
+                    <hr>
+                    <form action="">
+                        <div class="col-md-12 my-2">
+                            <label class="mb-2" for="crate_bulk"><b> Bulk Upload</b></label>
+                            <br>
+                            <input class="form-control" type="file" id="crate_bulk" name="crate_bulk"
+                                placeholder="Number of Crates" required>
+                        </div>
+                        <button class="btn btn-success">Upload</button>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
