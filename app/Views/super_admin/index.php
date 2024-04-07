@@ -2,6 +2,7 @@
 require 'include/navbar.php';
 // require APPPATH . 'Views/include/navbar.php';
 ?>
+
 <div class="container-fluid">
     <!--  Row 1 -->
     <div class="row">
@@ -36,8 +37,7 @@ require 'include/navbar.php';
                                 <div class="col-8">
                                     <h4 class="fw-semibold mb-3">$36,358</h4>
                                     <div class="d-flex align-items-center mb-3">
-                                        <span
-                                            class="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center">
+                                        <span class="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center">
                                             <i class="ti ti-arrow-up-left text-success"></i>
                                         </span>
                                         <p class="text-dark me-1 fs-3 mb-0">+9%</p>
@@ -49,8 +49,7 @@ require 'include/navbar.php';
                                             <span class="fs-2">2023</span>
                                         </div>
                                         <div>
-                                            <span
-                                                class="round-8 bg-light-primary rounded-circle me-2 d-inline-block"></span>
+                                            <span class="round-8 bg-light-primary rounded-circle me-2 d-inline-block"></span>
                                             <span class="fs-2">2023</span>
                                         </div>
                                     </div>
@@ -73,8 +72,7 @@ require 'include/navbar.php';
                                     <h5 class="card-title mb-9 fw-semibold"> Monthly Earnings </h5>
                                     <h4 class="fw-semibold mb-3">$6,820</h4>
                                     <div class="d-flex align-items-center pb-1">
-                                        <span
-                                            class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
+                                        <span class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
                                             <i class="ti ti-arrow-down-right text-danger"></i>
                                         </span>
                                         <p class="text-dark me-1 fs-3 mb-0">+9%</p>
@@ -83,8 +81,7 @@ require 'include/navbar.php';
                                 </div>
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
-                                        <div
-                                            class="text-white bg-secondary rounded-circle p-6 d-flex align-items-center justify-content-center">
+                                        <div class="text-white bg-secondary rounded-circle p-6 d-flex align-items-center justify-content-center">
                                             <i class="ti ti-currency-dollar fs-6"></i>
                                         </div>
                                     </div>
@@ -98,37 +95,46 @@ require 'include/navbar.php';
         </div>
     </div>
 
-<div class="container">
-    <table class="table table-striped">
-        <thead>
-            <th>S No.</th>
-            <th>Company Name</th>
-            <th>Company Email</th>
-            <th>Company Mobile</th>
-            <th>Action</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Google</td>
-                <td>googl@gmail.com</td>
-                <td>98765443</td>
-                <td>
-                    <button>Edit</button>
-                    <button>Active</button>
-                    <button>DeActive</button>
-                    <button>Delete</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <th>S No.</th>
+                <th>Company Name</th>
+                <th>Company Email</th>
+                <th>Company Mobile</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <?php foreach ($companyData as $key => $row) { ?>
+                    <tr>
+                        <td><?= ++$key ?></td>
+                        <td class="company-name"><?= $row->company_name ?></td>
+                        <td><?= $row->user_name ?></td>
+                        <td><?= $row->mobile ?></td>
+                        <td><?= $row->email ?></td>
+                        <td>
+                            <?php
+                            if ($row->status == 0) { ?>
+                                <a href="<?php echo base_url("company-active-deactive/$row->company_id/1"); ?>" title="Deactive"><button onclick="return confirm('Are you sure you want to Deactivate this company?')" class="btn btn-danger">Deactive</button></a>
+                            <?php  } else { ?>
+                                <a href="<?php echo base_url("company-active-deactive/$row->company_id/0"); ?>" title="Active"><button onclick="return confirm('Are you sure you want to Active this company?')" class="btn btn-primary">Active</button></a>
+                            <?php   }
+                            ?>
+                        </td>
+                        <td>
+                            <a href="<?php echo base_url("company-edit/$row->company_id"); ?>" title="Edit"><i style="cursor:pointer;" class="ti ti-pencil"></i></a>
+                            <a href="<?php echo base_url("company-delete/$row->company_id"); ?>" title="Delete"><i onclick="return confirm('Are you sure you want to Delete this company?')" style="cursor:pointer; color:red" class="ti ti-trash"></i></a>
+                        </td>
+                    </tr>
+                <?php  } ?>
+            </tbody>
+        </table>
+    </div>
 
 
-    
+
     <div class="py-6 px-6 text-center">
-        <p class="mb-0 fs-4">Design and Developed by <a href="https://affyclouditsolutions.com/" target="_blank"
-                class="pe-1 text-primary text-decoration-underline">Affy Cloud Solution</a></p>
+        <p class="mb-0 fs-4">Design and Developed by <a href="https://affyclouditsolutions.com/" target="_blank" class="pe-1 text-primary text-decoration-underline">Affy Cloud Solution</a></p>
     </div>
 </div>
 </div>

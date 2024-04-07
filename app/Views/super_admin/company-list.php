@@ -1,6 +1,7 @@
 <?php
 require 'include/navbar.php';
 ?>
+
 <style>
     .table-add input {
         width: 70px;
@@ -13,7 +14,8 @@ require 'include/navbar.php';
         cursor: pointer;
         margin: 0 5px
     }
-    .table-add i.ti-trash{
+
+    .table-add i.ti-trash {
         color: red;
     }
 
@@ -27,6 +29,7 @@ require 'include/navbar.php';
         border: 1px solid #000;
         color: #000 !important;
     }
+
     .table-responsive .dt-buttons,
     #userTable_filter {
         width: fit-content;
@@ -70,11 +73,11 @@ require 'include/navbar.php';
         color: #212529;
     }
 
-    .table-add button{
+    .table-add button {
         width: 100%
     }
 
-    .table-add .company-name{
+    .table-add .company-name {
         color: #007bff !important;
         cursor: pointer;
         font-weight: bold;
@@ -91,7 +94,7 @@ require 'include/navbar.php';
                 <div class="container">
                     <div class="row">
                         <div class="table-responsive">
-                            <table id="companyTable" class="table table-striped text-center table-add">
+                            <table id="userTable" class="table table-striped text-center table-add">
                                 <thead>
                                     <th>S No.</th>
                                     <th>Company Name</th>
@@ -102,28 +105,28 @@ require 'include/navbar.php';
                                     <th>Action</th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td class="company-name">Mircosoft</td>
-                                        <td>Steve Jobs</td>
-                                        <td>+91-9876543210</td>
-                                        <td>steve@microsoft.com</td>
-                                        <td>
-                                            <button class="btn btn-primary">Active</button>
-                                        </td>
-                                        <td><i class="ti ti-pencil"></i><i class="ti ti-trash"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td class="company-name">Google</td>
-                                        <td>Sundar Pichai</td>
-                                        <td>+91-9876543210</td>
-                                        <td>sundar@google.com</td>
-                                        <td>
-                                            <button class="btn btn-danger">Deactive</button>
-                                        </td>
-                                        <td><i class="ti ti-pencil"></i><i class="ti ti-trash"></i></td>
-                                    </tr>
+                                    <?php foreach ($companyData as $key => $row) { ?>
+                                        <tr>
+                                            <td><?= ++$key ?></td>
+                                            <td class="company-name"><?= $row->company_name ?></td>
+                                            <td><?= $row->user_name ?></td>
+                                            <td><?= $row->mobile ?></td>
+                                            <td><?= $row->email ?></td>
+                                            <td>
+                                                <?php
+                                                if ($row->status == 0) { ?>
+                                                    <a href="<?php echo base_url("company-active-deactive/$row->company_id/1"); ?>" title="Deactive"><button onclick="return confirm('Are you sure you want to Deactivate this company?')" class="btn btn-danger">Deactive</button></a>
+                                                <?php  } else { ?>
+                                                    <a href="<?php echo base_url("company-active-deactive/$row->company_id/0"); ?>" title="Active"><button onclick="return confirm('Are you sure you want to Active this company?')" class="btn btn-primary">Active</button></a>
+                                                <?php   }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <a href="<?php echo base_url("company-edit/$row->company_id"); ?>" title="Edit"><i style="cursor:pointer;" class="ti ti-pencil"></i></a>
+                                                <a href="<?php echo base_url("company-delete/$row->company_id"); ?>" title="Delete"><i onclick="return confirm('Are you sure you want to Delete this company?')" style="cursor:pointer;color:red" class="ti ti-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php  } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -131,12 +134,6 @@ require 'include/navbar.php';
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="container">
-        <h1>Note* Ahad remove this after reading</h1>
-        <h3>We want every company history with all admins, users, customers,dealers details</h3>
-        <h3>Design will be same as Company whole design with all access given to company same access will be with superadmin</h3>
     </div>
 
 

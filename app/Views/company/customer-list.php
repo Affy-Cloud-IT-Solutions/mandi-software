@@ -72,37 +72,11 @@ require 'include/navbar.php';
 <div class="container-fluid">
     <!--  Row 1 -->
     <div class="row">
-        <div class="col-md-12">
-            <div class="popup-title">
-                <h1 class="mb-0 text-center">Add New Customer</h5>
-            </div>
-            <form id="myForm">
-                <div class="row">
-                    <div class="col-md-6 my-2">
-                        <label for="name">Name:</label>
-                        <input class="form-control" type="text" id="name" name="name" required>
-                    </div>
-                    <div class="col-md-6 my-2">
-                        <label for="mobile">Mobile:</label>
-                        <input class="form-control" type="text" id="mobile" name="mobile" required>
-                    </div>
-                </div>
-                <button class="btn btn-success">Add Customer</button>
-            </form>
-        </div>
         <div class="col-lg-12">
             <div class="row">
                 <h1 class="text-center">Customer List</h1>
 
                 <div class="container">
-                    <div>
-                        <h5>Bulk Upload</span>
-                            <div class="my-2">
-                                <input type="file">
-                                <br>
-                                <button class="btn btn-success my-2">Upload</button>
-                            </div>
-                    </div>
                     <div class="row">
                         <div class="table-responsive">
                             <table id="userTable" class="table table-striped text-center table-add">
@@ -117,7 +91,7 @@ require 'include/navbar.php';
                                         <td>1</td>
                                         <td>Arsalan</td>
                                         <td>9876543210</td>
-                                        <td><i class="ti ti-pencil"></i><i class="ti ti-trash"></i></td>
+                                        <td><i class="ti ti-trash"></i></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -127,7 +101,7 @@ require 'include/navbar.php';
                 <!-- <div class="container">
                     <div class="row mt-3">
                         <div class="col-md-12 text-center">
-                            <button class="btn btn-success" id="exportCSV">Export to CSV</button>
+                            <button class="btn btn-primary" id="exportCSV">Export to CSV</button>
                             <button class="btn btn-success" id="exportExcel">Export to Excel</button>
                             <button class="btn btn-danger" id="exportPDF">Export to PDF</button>
                         </div>

@@ -71,7 +71,7 @@
                             <span class="hide-menu">Crates</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="<?= base_url('super-admin/create-company') ?>" aria-expanded="false">
+                            <a class="sidebar-link" href="<?= base_url('create-company') ?>" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-pencil"></i>
                                 </span>
@@ -79,7 +79,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="<?= base_url('super-admin/company-list') ?>" aria-expanded="false">
+                            <a class="sidebar-link" href="<?= base_url('company-list') ?>" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-article"></i>
                                 </span>

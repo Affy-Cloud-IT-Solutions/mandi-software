@@ -84,15 +84,32 @@ require 'include/navbar.php';
                                     <th>S No.</th>
                                     <th>Username</th>
                                     <th>Mobile</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Arsalan</td>
-                                        <td>9876543210</td>
-                                        <td><i class="ti ti-trash"></i></td>
-                                    </tr>
+                                    <?php
+                                    foreach ($userList as $key => $row) {
+                                    ?>
+                                        <tr>
+                                            <td><?= ++$key ?></td>
+                                            <td><?= $row->name ?></td>
+                                            <td><?= $row->mobile ?></td>
+                                            <td>
+                                                <?php
+                                                if ($row->status == 0) { ?>
+                                                    <a href="<?php echo base_url("user-active-deactive/$row->id/1"); ?>" title="Deactive"><button onclick="return confirm('Are you sure you want to Deactivate this company?')" class="btn btn-danger">Deactive</button></a>
+                                                <?php  } else { ?>
+                                                    <a href="<?php echo base_url("user-active-deactive/$row->id/0"); ?>" title="Active"><button onclick="return confirm('Are you sure you want to Active this company?')" class="btn btn-primary">Active</button></a>
+                                                <?php   }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <a href="<?php echo base_url("user-edit/$row->id"); ?>" title="Edit"><i style="cursor:pointer;" class="ti ti-pencil"></i></a>
+                                                <a href="<?php echo base_url("user-delete/$row->id"); ?>" title="Delete"><i onclick="return confirm('Are you sure you want to Delete this company?')" style="cursor:pointer; color:red" class="ti ti-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
