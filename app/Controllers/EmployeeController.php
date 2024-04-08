@@ -6,27 +6,23 @@ use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\UserModel;
 use App\Models\CustomerOrderModel;
+use App\Models\CustomerModel;
+use App\Models\BrandModel;
 
 
 class EmployeeController extends BaseController
 {
     protected $UserModel;
-<<<<<<< HEAD
     protected $CustomerModel;
     protected $BrandModel;
     protected $CustomerOrderModel;
-=======
->>>>>>> 4bb61c1de7f713e9b0151753d28e0aeb64354df3
 
     public function __construct()
     {
         $this->UserModel = new UserModel();
-<<<<<<< HEAD
         $this->CustomerModel = new CustomerModel();
         $this->BrandModel = new BrandModel();
         $this->CustomerOrderModel = new CustomerOrderModel();
-=======
->>>>>>> 4bb61c1de7f713e9b0151753d28e0aeb64354df3
     }
     public function index()
     {
@@ -58,7 +54,6 @@ class EmployeeController extends BaseController
 
     public function addCustomer()
     {
-<<<<<<< HEAD
         $customers = $this->CustomerModel->findAll();
         $brands = $this->BrandModel->findAll();
         return view('employee/add-customer', compact('customers', 'brands'));
@@ -143,10 +138,6 @@ class EmployeeController extends BaseController
         
     }
 
-=======
-        return view('employee/add-customer');
-    }
->>>>>>> 4bb61c1de7f713e9b0151753d28e0aeb64354df3
     public function addDealer()
     {
         return view('employee/add-dealer');
