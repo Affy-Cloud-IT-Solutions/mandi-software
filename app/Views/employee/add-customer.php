@@ -60,7 +60,7 @@ require 'include/navbar.php';
         <div class="col-lg-12">
             <div class="row">
                 <h1 class="text-center">Add Customer</h1>
-                
+
 
                 <form action="" class="form-inputs">
                     <div class="container">
@@ -119,7 +119,9 @@ require 'include/navbar.php';
                                                     <input class="form-control" type="text" value="<?= $brand['numberOfCrates'] ?>" placeholder="0">
                                                 </td>
                                                 <td>
-                                                    <a href="<?= base_url('employee/edit-brand/' . $brand['id']) ?>" data-toggle="modal" data-target="#addBrand2"><i class="ti ti-edit"></i></a>
+                                                    <a href="<?= base_url('employee/edit-brand/' . $brand['id']) ?>" data-toggle="modal" data-target="#addBrand2">
+                                                        <i class="ti ti-edit"></i>
+                                                    </a>
                                                     <i class="ti ti-trash"></i>
                                                 </td>
                                             </tr>
@@ -230,19 +232,19 @@ require 'include/navbar.php';
                 </button>
             </div>
             <div class="modal-body">
-                <form id="myForm" action="<?= base_url('employee/update-brand/' . $brand['id']) ?>" method="post">
+                <form id="myForm">
                     <div class="row">
                         <div class="col-md-12 my-2">
-                            <label class="mb-2" for="brand_name"><b> Brand Name</b></label>
-                            <input class="form-control" type="text" id="brand_name" name="brand_name" value="<?= $brand['brandName'] ?>" placeholder="Brand Name">
+                            <label class="mb-2" for="brandName"><b> Brand Name</b></label>
+                            <input class="form-control" type="text" id="brandName" name="brandName" value="<?= $brand['brandName'] ?>" placeholder="Brand Name">
                         </div>
                         <div class="col-md-12 my-2">
-                            <label class="mb-2" for="owner_name"><b> Owner Name</b></label>
-                            <input class="form-control" type="text" id="owner_name" name="owner_name" value="<?= $brand['ownerName'] ?>" placeholder="Owner Name">
+                            <label class="mb-2" for="ownerName"><b> Owner Name</b></label>
+                            <input class="form-control" type="text" id="ownerName" name="ownerName" value="<?= $brand['ownerName'] ?>" placeholder="Owner Name">
                         </div>
                         <div class="col-md-12 my-2">
-                            <label class="mb-2" for="no_crate"><b> Number of Crates</b></label>
-                            <input class="form-control" type="text" id="no_crate" name="no_crate" value="<?= $brand['numberOfCrates'] ?>" placeholder="Number of Crates">
+                            <label class="mb-2" for="numberOfCrates"><b> Number of Crates</b></label>
+                            <input class="form-control" type="text" id="numberOfCrates" name="numberOfCrates" value="<?= $brand['numberOfCrates'] ?>" placeholder="Number of Crates">
                         </div>
                     </div>
                     <button class="btn btn-primary">Add Crate</button>
@@ -256,6 +258,7 @@ require 'include/navbar.php';
 </div>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <?php
 require 'include/footer.php';
 ?>
