@@ -60,6 +60,7 @@ require 'include/navbar.php';
         <div class="col-lg-12">
             <div class="row">
                 <h1 class="text-center">Add Customer</h1>
+                
 
                 <form action="" class="form-inputs">
                     <div class="container">
