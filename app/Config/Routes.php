@@ -75,11 +75,14 @@ $routes->group('employee', ['filter' => 'FilterEmployee'], function ($routes) {
     $routes->get('/', 'EmployeeController::index');
     $routes->get('profile', 'EmployeeController::showProfile');
     $routes->get('add-customer', 'EmployeeController::addCustomer');
+<<<<<<< HEAD
     $routes->post('save-customer', 'EmployeeController::saveCustomer');
     $routes->get('select-customer', 'EmployeeController::selectCustomer'); //garbage
     $routes->post('save-crate', 'EmployeeController::saveCrate');
     $routes->post('save-customer-oders', 'EmployeeController::saveCustomerOders');
 
+=======
+>>>>>>> 4bb61c1de7f713e9b0151753d28e0aeb64354df3
     $routes->get('add-dealer', 'EmployeeController::addDealer');
     $routes->get('customer-reports', 'EmployeeController::customerReport');
     $routes->get('dealer-reports', 'EmployeeController::dealerReport');

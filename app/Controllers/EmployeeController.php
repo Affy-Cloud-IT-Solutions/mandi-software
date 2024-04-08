@@ -3,8 +3,6 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\BrandModel;
-use App\Models\CustomerModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\UserModel;
 use App\Models\CustomerOrderModel;
@@ -13,16 +11,22 @@ use App\Models\CustomerOrderModel;
 class EmployeeController extends BaseController
 {
     protected $UserModel;
+<<<<<<< HEAD
     protected $CustomerModel;
     protected $BrandModel;
     protected $CustomerOrderModel;
+=======
+>>>>>>> 4bb61c1de7f713e9b0151753d28e0aeb64354df3
 
     public function __construct()
     {
         $this->UserModel = new UserModel();
+<<<<<<< HEAD
         $this->CustomerModel = new CustomerModel();
         $this->BrandModel = new BrandModel();
         $this->CustomerOrderModel = new CustomerOrderModel();
+=======
+>>>>>>> 4bb61c1de7f713e9b0151753d28e0aeb64354df3
     }
     public function index()
     {
@@ -35,9 +39,9 @@ class EmployeeController extends BaseController
         if ($email && $password && $row = $this->UserModel->select('*')->where(['status' => 0, 'is_delete' => 0, 'email' => $email, 'password' => md5($password)])->get()->getRow()) {
             $sessionData = ['us_id' => $row->id, 'userName' => $row->name, 'userEmail' => $row->email, 'userMobile' => $row->mobile, 'companyId' => $row->company_idd, 'companyName' => $row->company_name];
             $this->session->set($sessionData);
-            return $this->session->has('us_id') ? redirect()->to(base_url("employee")) : $this->session->setFlashdata('success', 'User is Invalid. Please try again.');
+            return $this->session->has('us_id') ? redirect()->to(base_url("employee")) : $this->session->setFlashdata('message', 'User is Invalid. Please try again.');
         } else {
-            $this->session->setFlashdata('error', 'Invalid email or password format.');
+            $this->session->setFlashdata('message', 'Invalid email or password format.');
         }
         return view('employee/login');
     }
@@ -47,13 +51,14 @@ class EmployeeController extends BaseController
         return view('employee/profile');
     }
 
-    // public function userLogin()
-    // {
-    //     return view('employee/login');
-    // }
+    public function userLogin()
+    {
+        return view('employee/login');
+    }
 
     public function addCustomer()
     {
+<<<<<<< HEAD
         $customers = $this->CustomerModel->findAll();
         $brands = $this->BrandModel->findAll();
         return view('employee/add-customer', compact('customers', 'brands'));
@@ -138,6 +143,10 @@ class EmployeeController extends BaseController
         
     }
 
+=======
+        return view('employee/add-customer');
+    }
+>>>>>>> 4bb61c1de7f713e9b0151753d28e0aeb64354df3
     public function addDealer()
     {
         return view('employee/add-dealer');

@@ -2,13 +2,6 @@
 require 'include/navbar.php';
 ?>
 <div class="container-fluid">
-
-    <?php if (session()->has('success')) : ?>
-        <div class="alert alert-success">
-            <?= session('success') ?>
-        </div>
-    <?php endif; ?>
-
     <!--  Row 1 -->
     <div class="row">
         <div class="col-lg-8 d-flex align-items-strech">
@@ -36,9 +29,10 @@ require 'include/navbar.php';
 
 
 
-
+    
     <div class="py-6 px-6 text-center">
-        <p class="mb-0 fs-4">Design and Developed by <a href="https://affyclouditsolutions.com/" target="_blank" class="pe-1 text-primary text-decoration-underline">Affy Cloud Solution</a></p>
+        <p class="mb-0 fs-4">Design and Developed by <a href="https://affyclouditsolutions.com/" target="_blank"
+                class="pe-1 text-primary text-decoration-underline">Affy Cloud Solution</a></p>
     </div>
 </div>
 </div>

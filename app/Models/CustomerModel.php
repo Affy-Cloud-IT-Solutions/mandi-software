@@ -14,7 +14,10 @@ class CustomerModel extends Model
     protected $protectFields    = true;
     // protected $allowedFields    = ['customerName', 'phone', 'date',  'company_id', 'company_idd'];
     protected $allowedFields    = ['customerName','phone','company_idd', 'date','company_id'];
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4bb61c1de7f713e9b0151753d28e0aeb64354df3
 
 
     protected bool $allowEmptyInserts = false;
