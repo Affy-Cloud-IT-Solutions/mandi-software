@@ -9,12 +9,6 @@ use App\Models\UserModel;
 use App\Models\BrandModel;
 use App\Models\DealerModel;
 use App\Models\DealerReportModel;
-use App\Models\CustomerModel;
-<<<<<<< HEAD
-
-=======
-use App\Models\CustomerOrderModel;
->>>>>>> 4bb61c1de7f713e9b0151753d28e0aeb64354df3
 
 class CompanyController extends BaseController
 {
@@ -23,8 +17,6 @@ class CompanyController extends BaseController
     protected $BrandModel;
     protected $DealerModel;
     protected $DealerReportModel;
-    protected $CustomerModel;
-    protected $CustomerOrderModel;
 
     public function __construct()
     {
@@ -33,8 +25,6 @@ class CompanyController extends BaseController
         $this->BrandModel = new BrandModel();
         $this->DealerModel = new DealerModel();
         $this->DealerReportModel = new DealerReportModel();
-        $this->CustomerModel = new CustomerModel();
-        $this->CustomerModel = new CustomerOrderModel();
     }
     public function index()
     {
@@ -92,33 +82,6 @@ class CompanyController extends BaseController
         }
     }
 
-    public function addFormCrate()
-    {
-        $title = "Add Brand";
-        $crateformsave = base_url() . "save-form-crate"; // Correct variable name
-        return view('company/add-customer', compact("title", "crateformsave")); // Pass variables to view
-    }
-
-    public function saveFormCrate()
-    {
-        $companyUID = $_SESSION['companyUID'];
-        $dataKeyValue = [
-            'brandName' => $_POST['brand_name'],
-            'ownerName' => $_POST['owner_name'],
-            'numberOfCrates' => $_POST['no_crate'],
-            'company_idd' => $companyUID,
-            'created_at' => date('Y-m-d H:i:s'),
-        ];
-        $dataInsert =  $this->BrandModel->insert($dataKeyValue);
-        if ($dataInsert) {
-            $this->session->setFlashdata('success', 'Crate Successfully Insert');
-            return redirect()->to(base_url("add-customer"));
-        } else {
-            $this->session->setFlashdata('error', 'Something Went Wrong');
-            return redirect()->to(base_url("add-customer"));
-        }
-    }
-
     public function crateDelete($id)
     {
         $this->BrandModel->set('is_delete', 1)->where('id', $id)->update();
@@ -138,48 +101,9 @@ class CompanyController extends BaseController
     //CUTOMERS
     public function addCustomer()
     {
-        $title = "Add Brand";
-        $formSaveCustomer = base_url() . "save-customer";
-        $customers = $this->CustomerModel->findAll();
-        $brands = $this->BrandModel->findAll();
-        return view('company/add-customer', compact("title", "formSaveCustomer", "customers",'brands'));
+        return view('company/add-customer');
     }
-    public function saveCustomers()
-    {
-        $session = session();
 
-        $validation = \Config\Services::validation();
-        $validation->setRules([
-            'name' => 'required',
-            'mobile' => 'required|min_length[10]',
-        ]);
-        if (!$validation->run($_POST)) {
-            $session->setFlashdata('error2', 'Validation failed. Please check your input.');
-            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
-            // Handle errors
-        } else {
-            $company_idd = $_SESSION['companyId'];
-        $dataKeyValue = [
-            'customerName' => $_POST['name'],
-            'phone' => $_POST['mobile'],
-            'date' => date('Y-m-d H:i:s'),
-            'company_idd' => $company_idd,
-        ];
-
-        $dataInsert =  $this->CustomerModel->insert($dataKeyValue);
-
-        if ($dataInsert) {
-            $this->session->setFlashdata('success', 'Customer Successfully Insert');
-            return redirect()->to(base_url("add-customer"));
-        } else {
-            $this->session->setFlashdata('error', 'Something Went Wrong');
-            return redirect()->to(base_url("add-customer"));
-        }
-    }
-        }
-
-        
-    
     public function customerList()
     {
         return view('company/customer-list');
@@ -379,25 +303,5 @@ class CompanyController extends BaseController
     {
         $this->session->destroy();
         return redirect()->to(base_url("company-login"));
-    }
-
-    public function saveCustomerOders()
-    {
-        $dataKeyValue = [
-            'customerName' => $_POST['customerName'],
-            'brandName' => $_POST['brandName'],
-            'units' => $_POST['units'],
-            'date' => date('Y-m-d H:i:s'),
-        ];
-        $dataInsert =  $this->CustomerOrderModel->insert($dataKeyValue);
-
-        if ($dataInsert) {
-            $this->session->setFlashdata('success', 'Customer Oders Successfully Insert');
-            return redirect()->to(base_url("employee/add-customer"));
-        } else {
-            $this->session->setFlashdata('error', 'Something Went Wrong');
-            return redirect()->to(base_url("employee/add-customer"));
-        }
-        
     }
 }
