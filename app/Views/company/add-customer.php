@@ -70,9 +70,13 @@ require 'include/navbar.php';
                                 <label class="mb-2" for="Customername"><b> Customer Name</b></label>
                                 <select class="py-2 w-100" name="Customername" id="Customername">
                                     <option value="" selected disabled>Select Customer</option>
-                                    <option value="Customer">Customer 1</option>
-                                    <option value="Customer">Customer 2</option>
-                                    <option value="Customer">Customer 3</option>
+                                    
+                                    <?php foreach ($customers as $customer) : ?>
+                                        <option value="<?= $customer['id'] ?>">
+                                            <?= $customer['customerName'] ?>
+                                        </option>
+                                    <?php endforeach ?>
+
                                 </select>
                                 <button type="button" class="btn addbtn my-2 p-1" data-toggle="modal"
                                     data-target="#addCustomer">+Add</button>
@@ -82,11 +86,11 @@ require 'include/navbar.php';
 
                                 <select class="py-2 w-100" name="crate_for" id="crate_for" multiple>
                                     <option value="" selected disabled>Select Crate</option>
-                                    <option value="Customer">Crate 1</option>
-                                    <option value="Customer">Crate 2</option>
-                                    <option value="Customer">Crate 3</option>
-                                    <option value="Customer">Crate 4</option>
-                                    <option value="Customer">Crate 5</option>
+                                    <?php foreach ($brands as $brand) : ?>
+                                        <option value="<?= $brand['id'] ?>">
+                                            <?= $brand['brandName'] ?>
+                                        </option>
+                                    <?php endforeach ?>
                                 </select>
                                 <button type="button" class="btn addbtn my-2 p-1" data-toggle="modal"
                                     data-target="#addBrand">+Add</button>
