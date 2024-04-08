@@ -137,6 +137,21 @@ class CompanyController extends BaseController
     }
     public function saveCustomers()
     {
+        $session = session();
+
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'name' => 'required',
+            'mobile' => 'required|min_length[10]',
+        ]);
+        if (!$validation->run($_POST)) {
+            $session->setFlashdata('error2', 'Validation failed. Please check your input.');
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+            // Handle errors
+        } else {
+            print_r("hello");
+            die;
+        }
 
         $company_idd = $_SESSION['companyId'];
         $dataKeyValue = [

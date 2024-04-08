@@ -46,6 +46,18 @@ require 'include/navbar.php';
 
 <div class="container-fluid">
     <!--  Row 1 -->
+
+       <!-- Display session message -->
+       <?php if (session()->has('success')) : ?>
+                <div class="alert alert-success" role="alert">
+                    <?= session()->get('success') ?>
+                </div>
+            <?php elseif (session()->has('error')) : ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= session()->get('error') ?>
+                </div>
+            <?php endif; ?>
+
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
@@ -151,6 +163,7 @@ require 'include/navbar.php';
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="mb-0">Add New Customer</h5>
+
                 <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -160,11 +173,26 @@ require 'include/navbar.php';
     <div class="row">
         <div class="col-md-6 my-2">
             <label for="cutstomer_name">Name:</label>
-            <input class="form-control" type="text" id="name" name="name" required>
+            <input class="form-control" type="text" id="name" name="name">
+
+            <?php if (session()->has('errors')) : ?>
+                            <?php $errors = session('errors'); ?>
+                            <?php if (isset($errors['name'])) : ?>
+                                <p class="error text-danger "><?= esc($errors['name']) ?></p>
+                            <?php endif ?>
+                        <?php endif ?>
+
+
         </div>
         <div class="col-md-6 my-2">
             <label for="phone">Mobile:</label>
-            <input class="form-control" type="text" id="mobile" name="mobile" required>
+            <input class="form-control" type="text" id="mobile" name="mobile">
+            <?php if (session()->has('errors')) : ?>
+                            <?php $errors = session('errors'); ?>
+                            <?php if (isset($errors['mobile'])) : ?>
+                                <p class="error text-danger "><?= esc($errors['mobile']) ?></p>
+                            <?php endif ?>
+                        <?php endif ?>
         </div>
     </div>
     <button class="btn btn-primary">Add Customer</button>
