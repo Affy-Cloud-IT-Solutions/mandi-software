@@ -156,19 +156,19 @@ require 'include/navbar.php';
                 </button>
             </div>
             <div class="modal-body">
-                <form id="myForm">
-                    <div class="row">
-                        <div class="col-md-6 my-2">
-                            <label for="name">Name:</label>
-                            <input class="form-control" type="text" id="name" name="name" required>
-                        </div>
-                        <div class="col-md-6 my-2">
-                            <label for="mobile">Mobile:</label>
-                            <input class="form-control" type="text" id="mobile" name="mobile" required>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary">Add Customer</button>
-                </form>
+            <form action="<?= $formSaveCustomer ?>" class="form-inputs" method="post">
+    <div class="row">
+        <div class="col-md-6 my-2">
+            <label for="cutstomer_name">Name:</label>
+            <input class="form-control" type="text" id="name" name="name" required>
+        </div>
+        <div class="col-md-6 my-2">
+            <label for="phone">Mobile:</label>
+            <input class="form-control" type="text" id="mobile" name="mobile" required>
+        </div>
+    </div>
+    <button class="btn btn-primary">Add Customer</button>
+</form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -189,30 +189,28 @@ require 'include/navbar.php';
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" class="form-inputs" method="post">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-4 my-2">
-                                <label class="mb-2" for="crate_name"><b> Brand Name</b></label>
-                                <input class="form-control" type="text" id="brand_name" name="brand_name"
-                                    placeholder="Brand Name" required>
-                            </div>
-                            <div class="col-md-4 my-2">
-                                <label class="mb-2" for="crate_name"><b> Owner Name</b></label>
-                                <input class="form-control" type="text" id="owner_name" name="owner_name"
-                                    placeholder="Owner Name" required>
-                            </div>
-                            <div class="col-md-4 my-2">
-                                <label class="mb-2" for="crate_name"><b> Number of Crates</b></label>
-                                <input class="form-control" type="text" id="no_crate" name="no_crate"
-                                    placeholder="Number of Crates" required>
-                            </div>
-                            <div class="col-md-12 my-2">
-                                <button class="btn btn-primary">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+
+            <form action="<?= base_url('save-crate') ?>" class="form-inputs" method="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 my-2">
+                <label class="mb-2" for="crate_name"><b> Brand Name</b></label>
+                <input class="form-control" type="text" id="brand_name" name="brand_name" placeholder="Brand Name" required>
+            </div>
+            <div class="col-md-4 my-2">
+                <label class="mb-2" for="crate_name"><b> Owner Name</b></label>
+                <input class="form-control" type="text" id="owner_name" name="owner_name" placeholder="Owner Name" required>
+            </div>
+            <div class="col-md-4 my-2">
+                <label class="mb-2" for="crate_name"><b> Number of Crates</b></label>
+                <input class="form-control" type="text" id="no_crate" name="no_crate" placeholder="Number of Crates" required>
+            </div>
+            <div class="col-md-12 my-2">
+                <button class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

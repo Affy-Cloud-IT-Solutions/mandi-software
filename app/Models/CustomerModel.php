@@ -12,16 +12,20 @@ class CustomerModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['customerName','phone','company_idd','company_id','is_delete'];
+    // protected $allowedFields    = ['customerName', 'phone', 'date',  'company_id', 'company_idd'];
+    protected $allowedFields    = ['customerName','phone','company_idd', 'date','company_id'];
+
 
     protected bool $allowEmptyInserts = false;
 
     // Dates
-    protected $useTimestamps = false;
+
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    // protected $deletedField  = 'deleted_at';
+
 
     // Validation
     protected $validationRules      = [];
