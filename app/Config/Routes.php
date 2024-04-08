@@ -74,15 +74,11 @@ $routes->match(['get', 'post'], 'employee-login', 'EmployeeController::employeeL
 $routes->group('employee', ['filter' => 'FilterEmployee'], function ($routes) {
     $routes->get('/', 'EmployeeController::index');
     $routes->get('profile', 'EmployeeController::showProfile');
-
     $routes->get('add-customer', 'EmployeeController::addCustomer');
     $routes->post('save-customer', 'EmployeeController::saveCustomer');
-
     $routes->get('select-customer', 'EmployeeController::selectCustomer'); //garbage
-    
     $routes->post('save-crate', 'EmployeeController::saveCrate');
-    $routes->get('edit-brand/(:num)', 'EmployeeController::editFormBrand/$1');
-    // $routes->post('update-brand/(:num)', 'EmployeeController::updateBrand/$1');
+    $routes->post('save-customer-oders', 'EmployeeController::saveCustomerOders');
 
     $routes->get('add-dealer', 'EmployeeController::addDealer');
     $routes->get('customer-reports', 'EmployeeController::customerReport');

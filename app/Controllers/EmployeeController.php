@@ -7,6 +7,7 @@ use App\Models\BrandModel;
 use App\Models\CustomerModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\UserModel;
+use App\Models\CustomerOrderModel;
 
 
 class EmployeeController extends BaseController
@@ -14,12 +15,14 @@ class EmployeeController extends BaseController
     protected $UserModel;
     protected $CustomerModel;
     protected $BrandModel;
+    protected $CustomerOrderModel;
 
     public function __construct()
     {
         $this->UserModel = new UserModel();
         $this->CustomerModel = new CustomerModel();
         $this->BrandModel = new BrandModel();
+        $this->CustomerOrderModel = new CustomerOrderModel();
     }
     public function index()
     {
@@ -53,16 +56,8 @@ class EmployeeController extends BaseController
     {
         $customers = $this->CustomerModel->findAll();
         $brands = $this->BrandModel->findAll();
-        return view('employee/add-customer', ['customers' => $customers, 'brands' => $brands]);
+        return view('employee/add-customer', compact('customers', 'brands'));
     }
-
-    //     public function addCustomer()
-    // {
-    //     $customerModel = new CustomerModel();
-    //     $customers = $customerModel->findAll(); // Fetch all customers
-
-    //     return view('employee/add-customer', ['customers' => $customers]);
-    // }
 
     public function saveCustomer()
     {
@@ -108,13 +103,6 @@ class EmployeeController extends BaseController
         }
     }
 
-    // EDIT BRANDS
-    public function editFormBrand($id = null)
-    {
-        $brand = $this->BrandModel->find($id);
-        return view('employee/add-customer', ['brand' => $brand]);
-    }
-
     // UPDATE BRANDS
     public function updateBrand($id = null)
     {
@@ -128,6 +116,26 @@ class EmployeeController extends BaseController
          $this->BrandModel->where('id', $id)->update($data);
 
         return redirect()->to(base_url('employee/add-customer'))->with('success', 'Brand details updated successfully!');
+    }
+
+    public function saveCustomerOders()
+    {
+        // $dataKeyValue = [
+        //     'customerName' => $_POST['customerName'],
+        //     'brandName' => $_POST['brandName'],
+        //     'units' => $_POST['units'],
+        //     'date' => date('Y-m-d H:i:s'),
+        // ];
+        // $dataInsert =  $this->CustomerOrderModel->insert($dataKeyValue);
+
+        // if ($dataInsert) {
+        //     $this->session->setFlashdata('success', 'Customer Oders Successfully Insert');
+        //     return redirect()->to(base_url("employee/add-customer"));
+        // } else {
+        //     $this->session->setFlashdata('error', 'Something Went Wrong');
+        //     return redirect()->to(base_url("employee/add-customer"));
+        // }
+        
     }
 
     public function addDealer()

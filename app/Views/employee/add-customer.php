@@ -61,13 +61,12 @@ require 'include/navbar.php';
             <div class="row">
                 <h1 class="text-center">Add Customer</h1>
 
-
-                <form action="" class="form-inputs">
+                <form action="<?= base_url('employee/save-customer-oders') ?>" method="post" class="form-inputs">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-3 my-2">
-                                <label class="mb-2" for="Customername"><b> Customer Name</b></label>
-                                <select class="py-2 w-100" name="Customername" id="Customername">
+                                <label class="mb-2" for="customerName"><b> Customer Name</b></label>
+                                <select class="py-2 w-100" name="customerName" id="customerName">
                                     <option value="" selected disabled>Select Customer</option>
 
                                     <?php foreach ($customers as $customer) : ?>
@@ -78,9 +77,9 @@ require 'include/navbar.php';
                                 <button type="button" class="btn addbtn my-2 p-1" data-toggle="modal" data-target="#addCustomer">+Add</button>
                             </div>
                             <div class="col-md-3 my-2">
-                                <label class="mb-2" for="crate_name"><b> Crate Brand</b></label>
+                                <label class="mb-2" for="brandName"><b> Crate Brand</b></label>
 
-                                <select class="py-2 w-100" name="crate_for" id="crate_for" multiple>
+                                <select class="py-2 w-100" name="brandName" id="crate_for" multiple>
                                     <option value="" selected disabled>Select Crate</option>
                                     <?php foreach ($brands as $brand) : ?>
                                         <option value="<?= $brand['id'] ?>"><?= $brand['brandName'] ?></option>
@@ -90,16 +89,16 @@ require 'include/navbar.php';
 
                             </div>
                             <div class="col-md-3 my-2">
-                                <label class="mb-2" for="select_unit"><b>Units</b></label>
-                                <select class="py-2 w-100" name="select_unit" id="select_unit">
+                                <label class="mb-2" for="units"><b>Units</b></label>
+                                <select class="py-2 w-100" name="units" id="select_unit">
                                     <option value="" selected disabled>Select Units</option>
                                     <option value="Jama">Jama</option>
                                     <option value="Becha">Becha</option>
                                 </select>
                             </div>
                             <div class="col-md-3 my-2">
-                                <label class="mb-2" for="crate_name"><b>Select Date</b></label>
-                                <input class="form-control" type="date">
+                                <label class="mb-2" for="date"><b>Select Date</b></label>
+                                <input class="form-control" name="date" type="date">
                             </div>
                             <div class="col-md-12">
 
@@ -119,9 +118,6 @@ require 'include/navbar.php';
                                                     <input class="form-control" type="text" value="<?= $brand['numberOfCrates'] ?>" placeholder="0">
                                                 </td>
                                                 <td>
-                                                    <a href="<?= base_url('employee/edit-brand/' . $brand['id']) ?>" data-toggle="modal" data-target="#addBrand2">
-                                                        <i class="ti ti-edit"></i>
-                                                    </a>
                                                     <i class="ti ti-trash"></i>
                                                 </td>
                                             </tr>
@@ -209,42 +205,6 @@ require 'include/navbar.php';
                         <div class="col-md-12 my-2">
                             <label class="mb-2" for="no_crate"><b> Number of Crates</b></label>
                             <input class="form-control" type="text" id="no_crate" name="no_crate" placeholder="Number of Crates">
-                        </div>
-                    </div>
-                    <button class="btn btn-primary">Add Crate</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Edit Brand Modal -->
-<div class="modal fade" id="addBrand2" tabindex="-1" role="dialog" aria-labelledby="addBrandLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="mb-0">Edit Brand</h5>
-                <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="myForm">
-                    <div class="row">
-                        <div class="col-md-12 my-2">
-                            <label class="mb-2" for="brandName"><b> Brand Name</b></label>
-                            <input class="form-control" type="text" id="brandName" name="brandName" value="<?= $brand['brandName'] ?>" placeholder="Brand Name">
-                        </div>
-                        <div class="col-md-12 my-2">
-                            <label class="mb-2" for="ownerName"><b> Owner Name</b></label>
-                            <input class="form-control" type="text" id="ownerName" name="ownerName" value="<?= $brand['ownerName'] ?>" placeholder="Owner Name">
-                        </div>
-                        <div class="col-md-12 my-2">
-                            <label class="mb-2" for="numberOfCrates"><b> Number of Crates</b></label>
-                            <input class="form-control" type="text" id="numberOfCrates" name="numberOfCrates" value="<?= $brand['numberOfCrates'] ?>" placeholder="Number of Crates">
                         </div>
                     </div>
                     <button class="btn btn-primary">Add Crate</button>

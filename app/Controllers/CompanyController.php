@@ -7,24 +7,16 @@ use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\CompanyModel;
 use App\Models\UserModel;
 use App\Models\BrandModel;
-<<<<<<< HEAD
-use App\Models\CustomerModel;
 use App\Models\DealerModel;
 use App\Models\DealerReportModel;
+use App\Models\CustomerModel;
 
-=======
-use App\Models\DealerModel;
-use App\Models\DealerReportModel;
-use App\Models\CustomerModel;
->>>>>>> 8e6f9fa91736f6d825240cfc3bd3029148e4ad82
 
 class CompanyController extends BaseController
 {
     protected $CompanyModel;
     protected $UserModel;
     protected $BrandModel;
-    protected $CustomerModel;
-
     protected $DealerModel;
     protected $DealerReportModel;
     protected $CustomerModel;
