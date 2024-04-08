@@ -80,18 +80,15 @@ include 'include/links.php';
   }
 </style>
 <title>Super Admin Login</title>
-<?php if (session()->has('success')) : ?>
-  <div class="alert alert-success">
-    <?= session('success') ?>
-  </div>
-<?php endif; ?>
 
-<?php if (session()->has('error')) : ?>
-  <div class="alert alert-danger">
-    <?= session('error') ?>
-  </div>
-<?php endif; ?>
 <div class="container">
+
+  <?php if (session()->has('error')) : ?>
+    <div class="alert alert-danger">
+      <?= session('error') ?>
+    </div>
+  <?php endif; ?>
+  
   <div class="card">
     <h2>Employee Login</h2>
     <form id="loginForm" method="post" action="<?php echo base_url('employee-login') ?>">
