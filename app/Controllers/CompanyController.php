@@ -7,18 +7,18 @@ use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\CompanyModel;
 use App\Models\UserModel;
 use App\Models\BrandModel;
-<<<<<<< HEAD
 use App\Models\CustomerModel;
-=======
 use App\Models\DealerModel;
 use App\Models\DealerReportModel;
->>>>>>> 31049c468b1c0f875da50cc786721ac19a268c7b
+
 
 class CompanyController extends BaseController
 {
     protected $CompanyModel;
     protected $UserModel;
     protected $BrandModel;
+    protected $CustomerModel;
+
     protected $DealerModel;
     protected $DealerReportModel;
 
@@ -27,6 +27,7 @@ class CompanyController extends BaseController
         $this->CompanyModel = new CompanyModel();
         $this->UserModel = new UserModel();
         $this->BrandModel = new BrandModel();
+        $this->BrandModel = new CustomerModel();
         $this->DealerModel = new DealerModel();
         $this->DealerReportModel = new DealerReportModel();
     }

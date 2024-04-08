@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 <?php
 include 'include/links.php';
 ?>
-=======
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
->>>>>>> ba129f4a9dab01b2266b2d5eaef5a14329f57848
 
 
 <style>

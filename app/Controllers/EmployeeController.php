@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\BrandModel;
 use App\Models\CustomerModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\UserModel;
@@ -12,11 +13,13 @@ class EmployeeController extends BaseController
 {
     protected $UserModel;
     protected $CustomerModel;
+    protected $BrandModel;
 
     public function __construct()
     {
         $this->UserModel = new UserModel();
         $this->CustomerModel = new CustomerModel();
+        $this->BrandModel = new BrandModel();
     }
     public function index()
     {
@@ -48,8 +51,18 @@ class EmployeeController extends BaseController
 
     public function addCustomer()
     {
-        return view('employee/add-customer');
+        $customers = $this->CustomerModel->findAll();
+        $brands = $this->BrandModel->findAll();
+        return view('employee/add-customer', ['customers' => $customers, 'brands' => $brands]);
     }
+
+    //     public function addCustomer()
+    // {
+    //     $customerModel = new CustomerModel();
+    //     $customers = $customerModel->findAll(); // Fetch all customers
+
+    //     return view('employee/add-customer', ['customers' => $customers]);
+    // }
 
     public function saveCustomer()
     {
@@ -73,12 +86,48 @@ class EmployeeController extends BaseController
         }
     }
 
-    public function selectCustomer()
-    {
-        $customerModel = new CustomerModel();
-        $customers = $customerModel->findAll(); // Fetch all customers
+    // CRATES BRANDS
 
-        return view('employee/select-customer', ['customers' => $customers]);
+    public function saveCrate()
+    {
+        $companyUID = $_SESSION['companyId'];
+        $dataKeyValue = [
+            'brandName' => $_POST['brand_name'],
+            'ownerName' => $_POST['owner_name'],
+            'numberOfCrates' => $_POST['no_crate'],
+            'company_idd' => $companyUID,
+            'created_at' => date('Y-m-d H:i:s'),
+        ];
+        $dataInsert =  $this->BrandModel->insert($dataKeyValue);
+        if ($dataInsert) {
+            $this->session->setFlashdata('success', 'Crate Successfully Insert');
+            return redirect()->to(base_url("employee/add-customer"));
+        } else {
+            $this->session->setFlashdata('error', 'Something Went Wrong');
+            return redirect()->to(base_url("employee/add-customer"));
+        }
+    }
+
+    // EDIT BRANDS
+    public function editFormBrand($id = null)
+    {
+        $brand = $this->BrandModel->find($id);
+        return view('employee/add-customer', ['brand' => $brand]);
+    }
+
+    // UPDATE BRANDS
+    public function updateBrand($id = null)
+    {
+        $id = $this->request->getPost('brand_id');
+        $data = [
+            'brandName' => $this->request->getPost('brand_name'),
+            'ownerName' => $this->request->getPost('owner_name'),
+            'numberOfCrates' => $this->request->getPost('no_crate')
+        ];
+
+         $this->BrandModel->where('id', $id)->update($data);
+
+        return redirect()->to(base_url('employee/add-customer'))->with('success', 'Brand details updated successfully!');
     }
 
     public function addDealer()

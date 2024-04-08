@@ -68,9 +68,11 @@ require 'include/navbar.php';
                                 <label class="mb-2" for="Customername"><b> Customer Name</b></label>
                                 <select class="py-2 w-100" name="Customername" id="Customername">
                                     <option value="" selected disabled>Select Customer</option>
-                                    <option value="Customer">Customer 1</option>
-                                    <option value="Customer">Customer 2</option>
-                                    <option value="Customer">Customer 3</option>
+
+                                    <?php foreach ($customers as $customer) : ?>
+                                        <option value="<?= $customer['id'] ?>"><?= $customer['customerName'] ?></option>
+                                    <?php endforeach ?>
+
                                 </select>
                                 <button type="button" class="btn addbtn my-2 p-1" data-toggle="modal" data-target="#addCustomer">+Add</button>
                             </div>
@@ -79,11 +81,9 @@ require 'include/navbar.php';
 
                                 <select class="py-2 w-100" name="crate_for" id="crate_for" multiple>
                                     <option value="" selected disabled>Select Crate</option>
-                                    <option value="Customer">Crate 1</option>
-                                    <option value="Customer">Crate 2</option>
-                                    <option value="Customer">Crate 3</option>
-                                    <option value="Customer">Crate 4</option>
-                                    <option value="Customer">Crate 5</option>
+                                    <?php foreach ($brands as $brand) : ?>
+                                        <option value="<?= $brand['id'] ?>"><?= $brand['brandName'] ?></option>
+                                    <?php endforeach ?>
                                 </select>
                                 <button type="button" class="btn addbtn my-2 p-1" data-toggle="modal" data-target="#addBrand">+Add</button>
 
@@ -110,30 +110,19 @@ require 'include/navbar.php';
                                         <th>Action</th>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Brand 1</td>
-                                            <td>
-                                                <input class="form-control" type="text" value="1" placeholder="0">
-                                            </td>
-                                            <td><i class="ti ti-trash"></i></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Brand 2</td>
-                                            <td>
-                                                <input class="form-control" type="text" value="1" placeholder="0">
-                                            </td>
-                                            <td><i class="ti ti-trash"></i></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Brand 3</td>
-                                            <td>
-                                                <input class="form-control" type="text" value="1" placeholder="0">
-                                            </td>
-                                            <td><i class="ti ti-trash"></i></td>
-                                        </tr>
+                                        <?php foreach ($brands as $key => $brand) : ?>
+                                            <tr>
+                                                <td><?= $brand['id'] ?></td>
+                                                <td><?= $brand['brandName'] ?></td>
+                                                <td>
+                                                    <input class="form-control" type="text" value="<?= $brand['numberOfCrates'] ?>" placeholder="0">
+                                                </td>
+                                                <td>
+                                                    <a href="<?= base_url('employee/edit-brand/' . $brand['id']) ?>" data-toggle="modal" data-target="#addBrand2"><i class="ti ti-edit"></i></a>
+                                                    <i class="ti ti-trash"></i>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -204,19 +193,55 @@ require 'include/navbar.php';
                 </button>
             </div>
             <div class="modal-body">
-                <form id="myForm">
+                <form id="myForm" action="<?= site_url('employee/save-crate') ?>" method="post">
                     <div class="row">
                         <div class="col-md-12 my-2">
-                            <label class="mb-2" for="crate_name"><b> Brand Name</b></label>
-                            <input class="form-control" type="text" id="crate_name" name="crate_name" placeholder="Brand Name">
+                            <label class="mb-2" for="brand_name"><b> Brand Name</b></label>
+                            <input class="form-control" type="text" id="brand_name" name="brand_name" placeholder="Brand Name">
                         </div>
                         <div class="col-md-12 my-2">
-                            <label class="mb-2" for="crate_name"><b> Owner Name</b></label>
-                            <input class="form-control" type="text" id="crate_name" name="crate_name" placeholder="Owner Name">
+                            <label class="mb-2" for="owner_name"><b> Owner Name</b></label>
+                            <input class="form-control" type="text" id="owner_name" name="owner_name" placeholder="Owner Name">
                         </div>
                         <div class="col-md-12 my-2">
-                            <label class="mb-2" for="crate_name"><b> Number of Crates</b></label>
-                            <input class="form-control" type="text" id="crate_name" name="crate_name" placeholder="Number of Crates">
+                            <label class="mb-2" for="no_crate"><b> Number of Crates</b></label>
+                            <input class="form-control" type="text" id="no_crate" name="no_crate" placeholder="Number of Crates">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Add Crate</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Brand Modal -->
+<div class="modal fade" id="addBrand2" tabindex="-1" role="dialog" aria-labelledby="addBrandLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="mb-0">Edit Brand</h5>
+                <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myForm" action="<?= base_url('employee/update-brand/' . $brand['id']) ?>" method="post">
+                    <div class="row">
+                        <div class="col-md-12 my-2">
+                            <label class="mb-2" for="brand_name"><b> Brand Name</b></label>
+                            <input class="form-control" type="text" id="brand_name" name="brand_name" value="<?= $brand['brandName'] ?>" placeholder="Brand Name">
+                        </div>
+                        <div class="col-md-12 my-2">
+                            <label class="mb-2" for="owner_name"><b> Owner Name</b></label>
+                            <input class="form-control" type="text" id="owner_name" name="owner_name" value="<?= $brand['ownerName'] ?>" placeholder="Owner Name">
+                        </div>
+                        <div class="col-md-12 my-2">
+                            <label class="mb-2" for="no_crate"><b> Number of Crates</b></label>
+                            <input class="form-control" type="text" id="no_crate" name="no_crate" value="<?= $brand['numberOfCrates'] ?>" placeholder="Number of Crates">
                         </div>
                     </div>
                     <button class="btn btn-primary">Add Crate</button>

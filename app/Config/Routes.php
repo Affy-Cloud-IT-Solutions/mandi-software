@@ -72,7 +72,12 @@ $routes->group('employee', ['filter' => 'FilterEmployee'], function ($routes) {
 
     $routes->get('add-customer', 'EmployeeController::addCustomer');
     $routes->post('save-customer', 'EmployeeController::saveCustomer');
+
     $routes->get('select-customer', 'EmployeeController::selectCustomer');
+    
+    $routes->post('save-crate', 'EmployeeController::saveCrate');
+    $routes->get('edit-brand/(:num)', 'EmployeeController::editFormBrand/$1');
+    $routes->post('update-brand/(:num)', 'EmployeeController::updateBrand/$1');
 
     $routes->get('add-dealer', 'EmployeeController::addDealer');
     $routes->get('customer-reports', 'EmployeeController::customerReport');
