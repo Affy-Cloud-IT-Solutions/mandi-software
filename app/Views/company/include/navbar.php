@@ -153,7 +153,7 @@
                             </a>
                         </li> -->
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="<?= base_url('customer-reports') ?>" aria-expanded="false">
+                            <a class="sidebar-link" href="<?= base_url('company-customer-reports') ?>" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-article"></i>
                                 </span>

@@ -24,6 +24,7 @@ require 'include/navbar.php';
         border: 1px solid #000;
         color: #000 !important;
     }
+
     .table-responsive .dt-buttons,
     #userTable_filter {
         width: fit-content;
@@ -89,26 +90,29 @@ require 'include/navbar.php';
                                     <th>Vehicle Number</th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>01/04/2024</td>
-                                        <td>Customer 1</td>
-                                        <td>Brand 1</td>
-                                        <td>Becha</td>
-                                        <td>10</td>
-                                        <td>MP04AA1234</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>02/04/2024</td>
-                                        <td>Customer 1</td>
-                                        <td>Brand 2</td>
-                                        <td>Jama</td>
-                                        <td>14</td>
-                                        <td>MP37BB4321</td>
+                                    <?php
+                                    $incID = 0;
+                                    foreach ($DealerReport as $row) {
+                                        $arrBrand = explode(',', $row->brand_idd);
+                                        foreach ($arrBrand as $rowKey) {
+                                            ++$incID;
+                                            $BrandModel = new App\Models\BrandModel();
+                                            $DealerModel = new App\Models\DealerModel();
+                                            $BrandData = $BrandModel->select('*')->where(['id' => $rowKey])->get()->getrow();
+                                            $DealerData = $DealerModel->select('*')->where(['id' => $row->dealer_id])->get()->getrow();
+                                    ?>
+                                            <tr>
+                                                <td><?= $incID ?></td>
+                                                <td><?= $row->date ?></td>
+                                                <td><?= $DealerData->dealer_name ?? '' ?></td>
+                                                <td><?= $BrandData->brandName ?></td>
+                                                <td><?= $row->units ?></td>
+                                                <td><?= $BrandData->numberOfCrates ?></td>
+                                                <td><?= $row->vehicle_number ?></td>
+                                            </tr>
+                                    <?php }
+                                    } ?>
 
-                                    </tr>
-                                   
                                 </tbody>
                             </table>
                         </div>

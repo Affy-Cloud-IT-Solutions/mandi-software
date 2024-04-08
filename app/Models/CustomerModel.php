@@ -13,7 +13,7 @@ class CustomerModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     // protected $allowedFields    = ['customerName', 'phone', 'date',  'company_id', 'company_idd'];
-    protected $allowedFields    = ['customerName','phone','company_idd', 'date','company_id'];
+    protected $allowedFields    = ['customerName', 'phone', 'company_idd', 'date', 'company_id', 'is_delete', 'status', 'emp_id'];
 
 
     protected bool $allowEmptyInserts = false;

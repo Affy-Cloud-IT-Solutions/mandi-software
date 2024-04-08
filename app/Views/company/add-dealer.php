@@ -108,7 +108,7 @@ require 'include/navbar.php';
                             </div>
                             <div class="col-md-12">
 
-                                <table class="table table-striped text-center table-add">
+                                <!-- <table class="table table-striped text-center table-add">
                                     <thead>
                                         <th>S No.</th>
                                         <th>Crate Brand</th>
@@ -141,7 +141,7 @@ require 'include/navbar.php';
                                             <td><i class="ti ti-trash"></i></td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table> -->
                             </div>
 
                             <div class="col-md-12 my-2">

@@ -1,7 +1,7 @@
 <?php
 require 'include/navbar.php';
 ?>
- <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
 <style>
     .form-inputs label {
         color: #000;
@@ -37,7 +37,7 @@ require 'include/navbar.php';
         float: right;
     }
 
-    .closeBtn{
+    .closeBtn {
         background-color: transparent !important;
         border: none !important;
         font-size: 20px;
@@ -45,42 +45,55 @@ require 'include/navbar.php';
 </style>
 
 <div class="container-fluid">
+    <?php if (session()->has('success')) : ?>
+        <div class="alert alert-success">
+            <?= session('success') ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->has('error')) : ?>
+        <div class="alert alert-danger">
+            <?= session('error') ?>
+        </div>
+    <?php endif; ?>
     <!--  Row 1 -->
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
                 <h1 class="text-center">Add Dealer</h1>
 
-                <form action="" class="form-inputs">
+                <form action="<?php echo base_url(); ?>employee/dealer-report-save" class="form-inputs" method="post">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6 my-2">
                                 <label class="mb-2" for="dealername"><b> Dealer Name</b></label>
-                                <select class="py-2 w-100" name="dealername" id="dealername">
+                                <select class="py-2 w-100" name="dealername" id="dealername" required>
                                     <option value="" selected disabled>Select Dealer</option>
-                                    <option value="Dealer">Dealer 1</option>
-                                    <option value="Dealer">Dealer 2</option>
-                                    <option value="Dealer">Dealer 3</option>
+                                    <?php
+                                    foreach ($dealerList as $row1) { ?>
+                                        <option value="<?= $row1->id ?>"><?= $row1->dealer_name ?></option>
+                                    <?php }
+                                    ?>
                                 </select>
                                 <button type="button" class="btn addbtn my-2 p-1" data-toggle="modal" data-target="#addCustomer">+Add</button>
                             </div>
                             <div class="col-md-6 my-2">
                                 <label class="mb-2" for="crate_name"><b> Crate Brand</b></label>
 
-                                <select class="py-2 w-100" name="crate_for" id="crate_for" multiple>
-                                    <option value="" selected disabled>Select Crate</option>
-                                    <option value="Customer">Crate 1</option>
-                                    <option value="Dealer">Crate 2</option>
-                                    <option value="Dealer">Crate 3</option>
-                                    <option value="Dealer">Crate 4</option>
-                                    <option value="Dealer">Crate 5</option>
+                                <select class="py-2 w-100" name="crate_brand[]" id="crate_for" multiple required>
+                                    <option value="" disabled>Select Crate</option>
+                                    <?php
+                                    foreach ($userList as $row) { ?>
+                                        <option value="<?= $row->id ?>"><?= $row->brandName ?></option>
+                                    <?php }
+                                    ?>
                                 </select>
                                 <button type="button" class="btn addbtn my-2 p-1" data-toggle="modal" data-target="#addBrand">+Add</button>
 
                             </div>
                             <div class="col-md-4 my-2">
                                 <label class="mb-2" for="select_unit"><b>Units</b></label>
-                                <select class="py-2 w-100" name="select_unit" id="select_unit">
+                                <select class="py-2 w-100" name="select_unit" id="select_unit" required>
                                     <option value="" selected disabled>Select Units</option>
                                     <option value="Jama">Jama</option>
                                     <option value="Becha">Becha</option>
@@ -88,15 +101,15 @@ require 'include/navbar.php';
                             </div>
                             <div class="col-md-4 my-2">
                                 <label class="mb-2" for="crate_name"><b>Vehicle Number</b></label>
-                                <input class="form-control" type="text" placeholder="Enter Vehicle Number">
+                                <input class="form-control" type="text" name="vechile_no" placeholder="Enter Vehicle Number" required>
                             </div>
                             <div class="col-md-4 my-2">
                                 <label class="mb-2" for="crate_name"><b>Select Date</b></label>
-                               <input class="form-control" type="date">
+                                <input class="form-control" type="date" name="date" value="<?php echo date('Y-m-d') ?>" required>
                             </div>
                             <div class="col-md-12">
 
-                                <table class="table table-striped text-center table-add">
+                                <!-- <table class="table table-striped text-center table-add">
                                     <thead>
                                         <th>S No.</th>
                                         <th>Crate Brand</th>
@@ -129,7 +142,7 @@ require 'include/navbar.php';
                                             <td><i class="ti ti-trash"></i></td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table> -->
                             </div>
 
                             <div class="col-md-12 my-2">
@@ -148,72 +161,75 @@ require 'include/navbar.php';
 
 <!-- New Customer Modal -->
 <div class="modal fade" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="addCustomerLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="mb-0">Add New Dealer</h5>
-        <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form id="myForm">
-            <div class="row">
-                <div class="col-md-6 my-2">
-                    <label for="name">Name:</label>
-                    <input class="form-control" type="text" id="name" name="name" required>
-                </div>
-                <div class="col-md-6 my-2">
-                    <label for="mobile">Mobile:</label>
-                    <input class="form-control" type="text" id="mobile" name="mobile" required>
-                </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="mb-0">Add New Dealer</h5>
+                <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <button class="btn btn-primary">Add Customer</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary">Add</button> -->
-      </div>
+            <div class="modal-body">
+                <form id="myForm" action="<?php echo base_url('employee/company-save-dealer'); ?>" method="post">
+                    <div class="row">
+                        <div class="col-md-6 my-2">
+                            <label for="name">Name:</label>
+                            <input class="form-control" type="text" id="name" name="name" required>
+                        </div>
+                        <div class="col-md-6 my-2">
+                            <label for="mobile">Mobile:</label>
+                            <input class="form-control mobile_no" type="text" id="mobile" name="mobile" maxlength="10">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary change_name" type="submit">Add Dealer</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Add</button> -->
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- New Brand Modal -->
 <div class="modal fade" id="addBrand" tabindex="-1" role="dialog" aria-labelledby="addBrandLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="mb-0">Add New Brand</h5>
-        <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form id="myForm">
-            <div class="row">
-                <div class="col-md-12 my-2">
-                    <label class="mb-2" for="crate_name"><b> Brand Name</b></label>
-                    <input class="form-control" type="text" id="crate_name" name="crate_name" placeholder="Brand Name">
-                </div>
-                <div class="col-md-12 my-2">
-                    <label class="mb-2" for="crate_name"><b> Owner Name</b></label>
-                    <input class="form-control" type="text" id="crate_name" name="crate_name" placeholder="Owner Name">
-                </div>
-                <div class="col-md-12 my-2">
-                    <label class="mb-2" for="crate_name"><b> Number of Crates</b></label>
-                    <input class="form-control" type="text" id="crate_name" name="crate_name"
-                        placeholder="Number of Crates">
-                </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="mb-0">Add New Brand</h5>
+                <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <button class="btn btn-primary">Add Crate</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+            <div class="modal-body">
+                <form action="<?php echo base_url() ?>employee/save-crate" class="form-inputs" method="post">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 my-2">
+                                <label class="mb-2" for="crate_name"><b> Brand Name</b></label>
+                                <input class="form-control" type="text" id="brand_name" name="brand_name" placeholder="Brand Name" required>
+                            </div>
+                            <div class="col-md-4 my-2">
+                                <label class="mb-2" for="crate_name"><b> Owner Name</b></label>
+                                <input class="form-control" type="text" id="owner_name" name="owner_name" placeholder="Owner Name" required>
+                            </div>
+                            <div class="col-md-4 my-2">
+                                <label class="mb-2" for="crate_name"><b> Number of Crates</b></label>
+                                <input class="form-control" type="number" id="no_crate" name="no_crate" placeholder="Number of Crates" required>
+                            </div>
+                            <div class="col-md-12 my-2">
+                                <button class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

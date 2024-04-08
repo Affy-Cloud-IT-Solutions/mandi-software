@@ -12,7 +12,7 @@ class DealerReportModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['brand_idd','units','vehicle_number','company_idd','date','dealer_name'];
+    protected $allowedFields    = ['brand_idd', 'units', 'vehicle_number', 'company_idd', 'date', 'dealer_id', 'customer_created_id'];
 
     protected bool $allowEmptyInserts = false;
 

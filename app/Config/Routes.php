@@ -42,7 +42,10 @@ $routes->group('/', ['filter' => 'FilterCompany'], function ($routes) {
     // CUSTOMERS
     $routes->get('add-customer', 'CompanyController::addCustomer');
     $routes->get('customer-list', 'CompanyController::customerList');
-    $routes->post('save-customer', 'CompanyController::saveCustomers');
+    $routes->post('company-save-customer', 'CompanyController::saveCustomer');
+    $routes->post('save-customer-form', 'CompanyController::saveCustomerForm');
+    $routes->post('company-update-customer', 'CompanyController::companyUpdateCustomer');
+    $routes->get('customer-delete/(:num)', 'CompanyController::customerDelete/$1');
 
     //DEALERS
     $routes->get('add-dealer', 'CompanyController::addDealer');
@@ -65,7 +68,7 @@ $routes->group('/', ['filter' => 'FilterCompany'], function ($routes) {
 
     //REPORTS
     $routes->get('crate-reports', 'CompanyController::showCrate');
-    $routes->get('customer-reports', 'CompanyController::showCustomer');
+    $routes->get('company-customer-reports', 'CompanyController::showCustomer');
     $routes->get('dealer-reports', 'CompanyController::showDealer');
 });
 
@@ -75,13 +78,14 @@ $routes->group('employee', ['filter' => 'FilterEmployee'], function ($routes) {
     $routes->get('/', 'EmployeeController::index');
     $routes->get('profile', 'EmployeeController::showProfile');
     $routes->get('add-customer', 'EmployeeController::addCustomer');
-    $routes->post('save-customer', 'EmployeeController::saveCustomer');
     $routes->get('select-customer', 'EmployeeController::selectCustomer'); //garbage
     $routes->post('save-crate', 'EmployeeController::saveCrate');
     $routes->post('save-customer-oders', 'EmployeeController::saveCustomerOders');
-
+    $routes->post('save-customer', 'EmployeeController::employeeSaveCustomer');
+    $routes->post('company-save-dealer', 'EmployeeController::companySaveDealer');
     $routes->get('add-dealer', 'EmployeeController::addDealer');
     $routes->get('customer-reports', 'EmployeeController::customerReport');
     $routes->get('dealer-reports', 'EmployeeController::dealerReport');
+    $routes->post('dealer-report-save', 'EmployeeController::dealerReportSave');
     $routes->get('logout', 'EmployeeController::logout');
 });

@@ -5,8 +5,11 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 
+
 class CompanyController extends BaseController
 {
+    protected $CustomerModel;
+
     public function index()
     {
         return view('company/index');
@@ -42,6 +45,27 @@ class CompanyController extends BaseController
     public function customerList()
     {
         return view('company/customer-list');
+    }
+    public function saveCustomer()
+    {
+
+        $company_idd = $_SESSION['companyId'];
+        $dataKeyValue = [
+            'customerName' => $_POST['name'],
+            'phone' => $_POST['mobile'],
+            'date' => date('Y-m-d H:i:s'),
+            'company_idd' => $company_idd,
+        ];
+
+        $dataInsert =  $this->CustomerModel->insert($dataKeyValue);
+
+        if ($dataInsert) {
+            $this->session->setFlashdata('success', 'Customer Successfully Insert');
+            return redirect()->to(base_url("employee/add-customer"));
+        } else {
+            $this->session->setFlashdata('error', 'Something Went Wrong');
+            return redirect()->to(base_url("employee/add-customer"));
+        }
     }
 
     //DEALERS
@@ -81,6 +105,4 @@ class CompanyController extends BaseController
     {
         return view('company/dealer-reports');
     }
-
-
 }

@@ -104,7 +104,7 @@ require 'include/navbar.php';
                                             <tr>
                                                 <td><?= $incID ?></td>
                                                 <td><?= $row->date ?></td>
-                                                <td><?= $DealerData->dealer_name ?></td>
+                                                <td><?= $DealerData->dealer_name ?? '' ?></td>
                                                 <td><?= $BrandData->brandName ?></td>
                                                 <td><?= $row->units ?></td>
                                                 <td><?= $BrandData->numberOfCrates ?></td>

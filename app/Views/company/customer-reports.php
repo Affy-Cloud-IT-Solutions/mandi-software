@@ -24,6 +24,7 @@ require 'include/navbar.php';
         border: 1px solid #000;
         color: #000 !important;
     }
+
     .table-responsive .dt-buttons,
     #userTable_filter {
         width: fit-content;
@@ -88,23 +89,28 @@ require 'include/navbar.php';
                                     <th>Stock</th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>01/04/2024</td>
-                                        <td>Customer 1</td>
-                                        <td>Brand 1</td>
-                                        <td>Becha</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>02/04/2024</td>
-                                        <td>Customer 1</td>
-                                        <td>Brand 2</td>
-                                        <td>Jama</td>
-                                        <td>14</td>
-                                    </tr>
-                                   
+                                    <?php
+                                    $incID = 0;
+                                    foreach ($customerReport as $row) {
+                                        $arrBrand = explode(',', $row->brand_idd);
+                                        foreach ($arrBrand as $rowKey) {
+                                            ++$incID;
+                                            $BrandModel = new App\Models\BrandModel();
+                                            $CustomerModel = new App\Models\CustomerModel();
+                                            $BrandData = $BrandModel->select('*')->where(['id' => $rowKey])->get()->getrow();
+                                            $customerData = $CustomerModel->select('*')->where(['id' => $row->customer_idd])->get()->getrow();
+                                    ?>
+                                            <tr>
+                                                <td><?= $incID ?></td>
+                                                <td><?= $row->date ?></td>
+                                                <td><?= $customerData->customerName ?? '' ?></td>
+                                                <td><?= $BrandData->brandName ?></td>
+                                                <td><?= $row->units ?></td>
+                                                <td><?= $BrandData->numberOfCrates ?></td>
+                                            </tr>
+                                    <?php }
+                                    } ?>
+
                                 </tbody>
                             </table>
                         </div>

@@ -9,6 +9,8 @@ use App\Models\UserModel;
 use App\Models\BrandModel;
 use App\Models\DealerModel;
 use App\Models\DealerReportModel;
+use App\Models\CustomerModel;
+use App\Models\CustomerOrderModel;
 
 class CompanyController extends BaseController
 {
@@ -17,6 +19,9 @@ class CompanyController extends BaseController
     protected $BrandModel;
     protected $DealerModel;
     protected $DealerReportModel;
+    protected $CustomerModel;
+    protected $CustomerOrderModel;
+
 
     public function __construct()
     {
@@ -25,6 +30,8 @@ class CompanyController extends BaseController
         $this->BrandModel = new BrandModel();
         $this->DealerModel = new DealerModel();
         $this->DealerReportModel = new DealerReportModel();
+        $this->CustomerModel = new CustomerModel();
+        $this->CustomerOrderModel = new CustomerOrderModel();
     }
     public function index()
     {
@@ -47,6 +54,51 @@ class CompanyController extends BaseController
             }
         }
         return view('company/login');
+    }
+
+    public function saveCustomer()
+    {
+        $company_idd = $_SESSION['companyUID'];
+        $dataKeyValue = [
+            'customerName' => $_POST['name'],
+            'phone' => $_POST['mobile'],
+            'date' => date('Y-m-d H:i:s'),
+            'company_idd' => $company_idd,
+        ];
+
+        $dataInsert =  $this->CustomerModel->insert($dataKeyValue);
+
+        if ($dataInsert) {
+            $this->session->setFlashdata('success', 'Customer Successfully Insert');
+            return redirect()->to(base_url("customer-list"));
+        } else {
+            $this->session->setFlashdata('error', 'Something Went Wrong');
+            return redirect()->to(base_url("customer-list"));
+        }
+    }
+
+    public function companyUpdateCustomer()
+    {
+        $customer_id  = $_POST['id'];
+        $dataKeyValue = [
+            'customerName' => $_POST['name'],
+            'phone' => $_POST['mobile'],
+        ];
+        $dataInsert =  $this->CustomerModel->set($dataKeyValue)->where("id", $customer_id)->update();
+        if ($dataInsert) {
+            $this->session->setFlashdata('success', 'Customer Successfully Update');
+            return redirect()->to(base_url("customer-list"));
+        } else {
+            $this->session->setFlashdata('error', 'Something Went Wrong');
+            return redirect()->to(base_url("customer-list"));
+        }
+    }
+
+    public function customerDelete($id)
+    {
+        $this->CustomerModel->set('is_delete', 1)->where('id', $id)->update();
+        $this->session->setFlashdata('success', 'Customer Successfully Deleted');
+        return redirect()->to(base_url("customer-list"));
     }
 
     public function showProfile()
@@ -101,12 +153,17 @@ class CompanyController extends BaseController
     //CUTOMERS
     public function addCustomer()
     {
-        return view('company/add-customer');
+        $companyUID = $_SESSION['companyUID'];
+        $customerList = $this->CustomerModel->select('*')->where(['status' => '0', 'is_delete' => '0', 'company_idd' => $companyUID])->orderBy('id', 'desc')->get()->getResult();
+        $brandList = $this->BrandModel->select('*')->where(['is_delete' => '0', 'company_idd' => $companyUID])->orderBy('id', 'desc')->get()->getResult();
+        return view('company/add-customer', compact('customerList', 'brandList'));
     }
 
     public function customerList()
     {
-        return view('company/customer-list');
+        $companyUID = $_SESSION['companyUID'];
+        $customerList = $this->CustomerModel->select('*')->where(['status' => '0', 'is_delete' => '0', 'company_idd' => $companyUID])->orderBy('id', 'desc')->get()->getResult();
+        return view('company/customer-list', compact('customerList'));
     }
 
     //DEALERS
@@ -174,6 +231,27 @@ class CompanyController extends BaseController
         } else {
             $this->session->setFlashdata('error', 'Something Went Wrong');
             return redirect()->to(base_url("add-dealer"));
+        }
+    }
+    public function saveCustomerForm()
+    {
+        $companyUID = $_SESSION['companyUID'];
+        $crateBrand = implode(',', $_POST['crate_brand']);
+        $dataKeyValue = [
+            'customer_idd' => $_POST['Customername'],
+            'brand_idd' => $crateBrand,
+            'units' => $_POST['select_unit'],
+            'date' => $_POST['date'],
+            'company_idd' => $companyUID,
+            'created_at' => date('Y-m-d H:i:s'),
+        ];
+        $dataInsert =  $this->CustomerOrderModel->insert($dataKeyValue);
+        if ($dataInsert) {
+            $this->session->setFlashdata('success', 'Customer Successfully Insert');
+            return redirect()->to(base_url("add-customer"));
+        } else {
+            $this->session->setFlashdata('error', 'Something Went Wrong');
+            return redirect()->to(base_url("add-customer"));
         }
     }
     public function dealerList()
@@ -250,7 +328,9 @@ class CompanyController extends BaseController
 
     public function showCustomer()
     {
-        return view('company/customer-reports');
+        $companyUID = $_SESSION['companyUID'];
+        $customerReport = $this->CustomerOrderModel->select('*')->where(['delete_status' => '0', 'company_idd' => $companyUID])->orderBy('id', 'desc')->get()->getResult();
+        return view('company/customer-reports', compact('customerReport'));
     }
 
     public function showDealer()

@@ -12,7 +12,7 @@ class DealerModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['dealer_id', 'dealer_no', 'status', 'is_delete','company_idd','created_date'];
+    protected $allowedFields    = ['dealer_id', 'dealer_no', 'status', 'is_delete','company_idd','created_date','dealer_name'];
 
     protected bool $allowEmptyInserts = false;
 
