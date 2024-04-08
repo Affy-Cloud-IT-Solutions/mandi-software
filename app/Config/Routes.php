@@ -35,9 +35,14 @@ $routes->group('/', ['filter' => 'FilterCompany'], function ($routes) {
     $routes->get('crate-delete/(:num)', 'CompanyController::crateDelete/$1');
 
 
+    // $routes->get('add-form-crate', 'CompanyController::addFormCrate');
+    // $routes->post('save-form-crate', 'CompanyController::saveFormCrate');
+
+
     // CUSTOMERS
     $routes->get('add-customer', 'CompanyController::addCustomer');
     $routes->get('customer-list', 'CompanyController::customerList');
+    $routes->post('save-customer', 'CompanyController::saveCustomers');
 
     //DEALERS
     $routes->get('add-dealer', 'CompanyController::addDealer');

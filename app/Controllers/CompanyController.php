@@ -7,10 +7,16 @@ use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\CompanyModel;
 use App\Models\UserModel;
 use App\Models\BrandModel;
+<<<<<<< HEAD
 use App\Models\CustomerModel;
 use App\Models\DealerModel;
 use App\Models\DealerReportModel;
 
+=======
+use App\Models\DealerModel;
+use App\Models\DealerReportModel;
+use App\Models\CustomerModel;
+>>>>>>> 8e6f9fa91736f6d825240cfc3bd3029148e4ad82
 
 class CompanyController extends BaseController
 {
@@ -21,6 +27,7 @@ class CompanyController extends BaseController
 
     protected $DealerModel;
     protected $DealerReportModel;
+    protected $CustomerModel;
 
     public function __construct()
     {
@@ -30,6 +37,7 @@ class CompanyController extends BaseController
         $this->BrandModel = new CustomerModel();
         $this->DealerModel = new DealerModel();
         $this->DealerReportModel = new DealerReportModel();
+        $this->CustomerModel = new CustomerModel();
     }
     public function index()
     {
@@ -87,6 +95,33 @@ class CompanyController extends BaseController
         }
     }
 
+    public function addFormCrate()
+    {
+        $title = "Add Brand";
+        $crateformsave = base_url() . "save-form-crate"; // Correct variable name
+        return view('company/add-customer', compact("title", "crateformsave")); // Pass variables to view
+    }
+
+    public function saveFormCrate()
+    {
+        $companyUID = $_SESSION['companyUID'];
+        $dataKeyValue = [
+            'brandName' => $_POST['brand_name'],
+            'ownerName' => $_POST['owner_name'],
+            'numberOfCrates' => $_POST['no_crate'],
+            'company_idd' => $companyUID,
+            'created_at' => date('Y-m-d H:i:s'),
+        ];
+        $dataInsert =  $this->BrandModel->insert($dataKeyValue);
+        if ($dataInsert) {
+            $this->session->setFlashdata('success', 'Crate Successfully Insert');
+            return redirect()->to(base_url("add-customer"));
+        } else {
+            $this->session->setFlashdata('error', 'Something Went Wrong');
+            return redirect()->to(base_url("add-customer"));
+        }
+    }
+
     public function crateDelete($id)
     {
         $this->BrandModel->set('is_delete', 1)->where('id', $id)->update();
@@ -106,27 +141,31 @@ class CompanyController extends BaseController
     //CUTOMERS
     public function addCustomer()
     {
-        return view('company/add-customer');
+        $title = "Add Brand";
+        $formSaveCustomer = base_url() . "save-customer";
+        return view('company/add-customer', compact("title", "formSaveCustomer"));
     }
+    public function saveCustomers()
+    {
 
+        $company_idd = $_SESSION['companyId'];
+        $dataKeyValue = [
+            'customerName' => $_POST['name'],
+            'phone' => $_POST['mobile'],
+            'date' => date('Y-m-d H:i:s'),
+            'company_idd' => $company_idd,
+        ];
 
-    public function saveCustomer(){
-        $companyUID = $_SESSION['companyUID'];
-    $data = [
-    'customerName' =>  $_POST['cutstomer_name'],
-    'phone' => $_POST['phone'],
-    'company_id' =>  $companyUID,
-    'created_at' => date('Y-m-d H:i:s'),
-    'is_delete' => false
-];
-    $dataInsert =  $this->CustomerModel->insert($data);
-    if ($customerModel->saveCustomer($data)) {
-    echo "Customer saved successfully!";
-} else {
-    echo "Failed to save customer!";
-}
+        $dataInsert =  $this->CustomerModel->insert($dataKeyValue);
+
+        if ($dataInsert) {
+            $this->session->setFlashdata('success', 'Customer Successfully Insert');
+            return redirect()->to(base_url("add-customer"));
+        } else {
+            $this->session->setFlashdata('error', 'Something Went Wrong');
+            return redirect()->to(base_url("add-customer"));
+        }
     }
-
     
     public function customerList()
     {
