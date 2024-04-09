@@ -209,6 +209,12 @@ class CompanyController extends BaseController
             return redirect()->to(base_url("dealer-list"));
         }
     }
+    public function companyForm()
+    {
+        $crate_for = $_POST['crate_for'];
+        $brandList = $this->BrandModel->select('*')->whereIn('id', $crate_for)->get()->getResult();
+        return view('company/ajax_form_append', compact('brandList'));
+    }
 
 
     public function dealerReportSave()

@@ -61,14 +61,15 @@ require 'include/navbar.php';
                         }
                         ?>
                         <input type="checkbox" id="show_password_checkbox" <?= $hidden, $checked ?> onclick="showPassword()">
-                        <input class="form-control" type="text" name="password" id="password" placeholder="Enter Password" <?= $checked . ' ' . $disabled ?>>
+                        <input class="form-control password" type="text" name="password" id="password" placeholder="Enter Password" <?= $checked . ' ' . $disabled ?>>
                     </div>
                     <div class="col-md-6 my-2">
                         <label for="">Confirm Password</label>
-                        <input class="form-control" type="text" id="repassword" placeholder="Confirm Password" <?= $checked . ' ' . $disabled ?>>
+                        <input class="form-control password" type="text" id="repassword" placeholder="Confirm Password" <?= $checked . ' ' . $disabled ?>>
+                        <span id="message" style="color:red;display:none">Password not Match</span>
                     </div>
                     <div class="col-md-12 my-2">
-                        <button class="btn btn-success">Save</button>
+                        <button class="btn btn-success btn_disabled">Save</button>
                     </div>
                 </div>
             </form>
@@ -91,4 +92,7 @@ require 'include/footer.php';
             $('#repassword').prop('disabled', false);
         }
     }
+
+
+    
 </script>

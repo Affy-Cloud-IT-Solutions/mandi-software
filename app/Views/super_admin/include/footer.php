@@ -23,6 +23,18 @@
             ]
         });
     });
+
+    $(".password").keyup(function() {
+        var confpass = $("#repassword").val();
+        var pass = $("#password").val();
+        if (confpass == pass) {
+            $('.btn_disabled').prop('disabled', false);
+            $("#message").hide();
+        } else {
+            $('.btn_disabled').prop('disabled', true);
+            $("#message").show();
+        }
+    });
 </script>
 
 </body>

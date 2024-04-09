@@ -1,12 +1,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
 <script>
-    jQuery(document).ready(function ($) {
+    jQuery(document).ready(function($) {
         // Your code using $ as an alias to jQuery goes here...
         $('#customername').select2();
         $('#crate_for').select2();
         $('#dealername').select2();
         $('#select_unit').select2();
-        
+
     });
 </script>
 
@@ -27,7 +27,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/vfs_fonts.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#userTable').DataTable({
             dom: 'Bfrtip',
             buttons: [
@@ -38,5 +38,32 @@
 </script>
 
 </body>
+<script>
+    function addCrateBrand(urlSite, htmlAppend) {
+        var crate_for = $("#crate_for").val();
+        $.ajax({
+            url: "<?php echo base_url() ?>" + urlSite,
+            type: "POST",
+            data: {
+                crate_for: crate_for
+            },
+            success: function(msg) {
+                console.log(msg);
+                $("." + htmlAppend).html(msg);
+            },
+            error: function(xhr, status, error) {
+                console.error("Error:", error);
+            }
+        });
+    }
+
+    $('.mobile_no').on('keypress', function(event) {
+        var charCode = event.which ? event.which : event.keyCode;
+        // Allow only numeric keys (0-9) and backspace (8) key
+        if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 8) {
+            event.preventDefault();
+        }
+    });
+</script>
 
 </html>

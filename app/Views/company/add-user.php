@@ -85,15 +85,17 @@ require 'include/navbar.php';
                                 }
                                 ?>
                                 <input type="checkbox" id="show_password_checkbox" <?= $hidden, $checked ?> onclick="showPassword()">
-                                <input class="form-control" type="text" name="password" id="password" placeholder="Enter Password" <?= $checked . ' ' . $disabled ?>>
+                                <input class="form-control password" type="text" name="password" id="password" placeholder="Enter Password" <?= $checked . ' ' . $disabled ?>>
                             </div>
                             <div class="col-md-4 my-2">
                                 <label class="mb-2" for="crate_name"><b>Confirm Password</b></label>
-                                <input class="form-control" type="text" id="repassword" placeholder="Confirm Password" <?= $checked . ' ' . $disabled ?>>
+                                <input class="form-control password" type="text" id="repassword" placeholder="Confirm Password" <?= $checked . ' ' . $disabled ?>>
+                                <span id="message" style="color:red;display:none">Password not Match</span>
+
                             </div>
 
                             <div class="col-md-12 my-2">
-                                <button class="btn btn-primary">Save</button>
+                                <button class="btn btn-primary btn_disabled">Save</button>
                             </div>
                         </div>
                     </div>

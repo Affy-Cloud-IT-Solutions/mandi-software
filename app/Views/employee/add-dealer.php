@@ -80,7 +80,7 @@ require 'include/navbar.php';
                             <div class="col-md-6 my-2">
                                 <label class="mb-2" for="crate_name"><b> Crate Brand</b></label>
 
-                                <select class="py-2 w-100" name="crate_brand[]" id="crate_for" multiple required>
+                                <select class="py-2 w-100" name="crate_brand[]" id="crate_for" multiple required onchange="addCrateBrand('employee/employee-form','ajax_dealer_form')">
                                     <option value="" disabled>Select Crate</option>
                                     <?php
                                     foreach ($userList as $row) { ?>
@@ -107,42 +107,9 @@ require 'include/navbar.php';
                                 <label class="mb-2" for="crate_name"><b>Select Date</b></label>
                                 <input class="form-control" type="date" name="date" value="<?php echo date('Y-m-d') ?>" required>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12 ajax_dealer_form">
 
-                                <!-- <table class="table table-striped text-center table-add">
-                                    <thead>
-                                        <th>S No.</th>
-                                        <th>Crate Brand</th>
-                                        <th>Stocks</th>
-                                        <th>Action</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Brand 1</td>
-                                            <td>
-                                                <input class="form-control" type="text" value="1" placeholder="0">
-                                            </td>
-                                            <td><i class="ti ti-trash"></i></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Brand 2</td>
-                                            <td>
-                                                <input class="form-control" type="text" value="1" placeholder="0">
-                                            </td>
-                                            <td><i class="ti ti-trash"></i></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Brand 3</td>
-                                            <td>
-                                                <input class="form-control" type="text" value="1" placeholder="0">
-                                            </td>
-                                            <td><i class="ti ti-trash"></i></td>
-                                        </tr>
-                                    </tbody>
-                                </table> -->
+
                             </div>
 
                             <div class="col-md-12 my-2">

@@ -217,6 +217,13 @@ class EmployeeController extends BaseController
         $DealerReport = $this->DealerReportModel->select('*')->where(['is_delete' => '0', 'company_idd' => $companyUID, 'customer_created_id' => $us_id])->orderBy('id', 'desc')->get()->getResult();
         return view('employee/dealer-reports', compact('DealerReport'));
     }
+
+    public function companyForm()
+    {
+        $crate_for = $_POST['crate_for'];
+        $brandList = $this->BrandModel->select('*')->whereIn('id', $crate_for)->get()->getResult();
+        return view('employee/ajax_form_append', compact('brandList'));
+    }
     public function logout()
     {
         $this->session->destroy();

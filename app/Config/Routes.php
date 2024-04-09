@@ -27,6 +27,7 @@ $routes->group('/', ['filter' => 'FilterCompany'], function ($routes) {
     $routes->get('company', 'CompanyController::index');
     $routes->get('company/profile', 'CompanyController::showProfile');
     $routes->get('company/logout', 'CompanyController::logout');
+    $routes->post('company-form', 'CompanyController::companyForm');
 
     // CRATES
     $routes->get('add-crate', 'CompanyController::addCrate');
@@ -87,5 +88,6 @@ $routes->group('employee', ['filter' => 'FilterEmployee'], function ($routes) {
     $routes->get('customer-reports', 'EmployeeController::customerReport');
     $routes->get('dealer-reports', 'EmployeeController::dealerReport');
     $routes->post('dealer-report-save', 'EmployeeController::dealerReportSave');
+    $routes->post('employee-form', 'EmployeeController::companyForm');
     $routes->get('logout', 'EmployeeController::logout');
 });
