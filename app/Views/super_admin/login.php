@@ -12,6 +12,7 @@
     background: #fafafa;
     font-family: Arial, Helvetica, sans-serif;
     color: #333;
+    background-color: rgba(0, 0, 0, 0.8);
   }
 
   .container {
@@ -22,10 +23,8 @@
   .card {
     width: 100%;
     background-color: #f8f8f8;
-    /* Warna card */
     padding: 20px;
     border-radius: 12px;
-    /* Border radius card */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
@@ -43,59 +42,36 @@
     padding: 10px;
     margin-bottom: 12px;
     border: 2px solid #ddd;
-    /* Border color input */
     border-radius: 8px;
-    /* Border radius input */
     transition: border-color 0.3s ease-in-out;
     outline: none;
     color: #333;
     background-color: #f4f4f4;
-    /* Warna input */
   }
 
   input:focus {
     border-color: #ff9900;
-    /* Warna input saat focus */
   }
 
   button {
     background-color: #ff9900;
-    /* Warna button */
     color: #fff;
     padding: 10px;
     border: none;
     border-radius: 8px;
-    /* Border radius button */
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
   }
 
   button:hover {
     background-color: #ff6600;
-    /* Warna button saat hover */
   }
 
   .w-100 {
     width: 100%;
   }
-</style>
-<title>Super Admin Login</title>
-<div class="container">
 
-  <?php if (session()->has('success')): ?>
-    <div class="alert alert-success">
-      <?= session('success') ?>
-    </div>
-  <?php endif; ?>
-
-  <?php if (session()->has('error')) { ?>
-    <div class="alert alert-danger" role="alert">
-      <?= session('error') ?>
-    </div>
-    <?php
-  } ?>
-  <style>
-    .inputBox {
+  .inputBox {
       border: 1px solid #000;
       align-items: center;
       border-radius: 7px;
@@ -114,10 +90,32 @@
       cursor: pointer;
       font-weight: bold;
     }
-  </style>
+
+    .img-small{
+      height: 100px;
+      width: 100px;
+    }
+</style>
+<title>Super Admin Login</title>
+<div class="container">
+
+  <?php if (session()->has('success')): ?>
+    <div class="alert alert-success">
+      <?= session('success') ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if (session()->has('error')) { ?>
+    <div class="alert alert-danger" role="alert">
+      <?= session('error') ?>
+    </div>
+    <?php
+  } ?>
+
 
   <div class="card">
-    <h2>Login</h2>
+    <!-- <h2>Login</h2> -->
+    <img class="img-small m-auto" src="https://affyclouditsolutions.com/assets/images/favicon.png" alt="">
     <form id="loginForm" method="post" action="<?php echo base_url(route_to('login')) ?>">
       <input type="text" id="email" name="email" placeholder="Enter Email" required>
       <div class="d-flex inputBox">
@@ -128,6 +126,8 @@
     </form>
   </div>
 </div>
+
+
 
 <script>
   // Function to toggle password visibility
