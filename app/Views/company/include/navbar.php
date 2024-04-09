@@ -88,12 +88,12 @@
                                 <span class="hide-menu">Brands</span>
                             </a>
                         </li>
-                        <li class="sidebar-item" title="Customer Form">
+                        <li class="sidebar-item" title="Customer Order">
                             <a class="sidebar-link" href="<?= base_url('add-customer') ?>" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-shopping-cart"></i>
                                 </span>
-                                <span class="hide-menu">Customer Form</span>
+                                <span class="hide-menu">Customer Order</span>
                             </a>
                         </li>
                         <li class="sidebar-item" title="Customer List">
@@ -104,12 +104,12 @@
                                 <span class="hide-menu">Customer List</span>
                             </a>
                         </li>
-                        <li class="sidebar-item" title="Dealer Form">
+                        <li class="sidebar-item" title="Dealer Order">
                             <a class="sidebar-link" href="<?= base_url('add-dealer') ?>" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-truck"></i>
                                 </span>
-                                <span class="hide-menu">Dealer Form</span>
+                                <span class="hide-menu">Dealer Order</span>
                             </a>
                         </li>
                         <li class="sidebar-item" title="Dealer List">
