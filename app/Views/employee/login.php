@@ -1,6 +1,9 @@
 <?php
 include 'include/links.php';
 ?>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  crossorigin="anonymous" />
 
 <style>
   body {
@@ -78,6 +81,26 @@ include 'include/links.php';
   .w-100 {
     width: 100%;
   }
+
+  .inputBox {
+      border: 1px solid #000;
+      align-items: center;
+      border-radius: 7px;
+      padding-right: 10px;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .inputBox input {
+      border: none;
+      margin-bottom: 0;
+      width: 100%;
+    }
+
+    .inputBox i:hover {
+      cursor: pointer;
+      font-weight: bold;
+    }
 </style>
 <title>Super Admin Login</title>
 <?php if (session()->has('success')) : ?>
@@ -96,8 +119,42 @@ include 'include/links.php';
     <h2>Employee Login</h2>
     <form id="loginForm" method="post" action="<?php echo base_url('employee-login') ?>">
       <input type="text" id="email" name="email" placeholder="Enter Email" required>
+      <div class="d-flex inputBox">
       <input type="password" id="password" name="password" placeholder="Enter Password" required>
+      <i class="fa fa-eye"></i>
+      </div>
       <button class="w-100" type="submit">Login</button>
     </form>
   </div>
 </div>
+
+<script>
+  // Function to toggle password visibility
+  function togglePasswordVisibility(inputField, eyeIcon) {
+    var inputType = inputField.getAttribute('type');
+    if (inputType === 'password') {
+      inputField.setAttribute('type', 'text');
+      eyeIcon.classList.remove('fa-eye-slash');
+      eyeIcon.classList.add('fa-eye');
+    } else {
+      inputField.setAttribute('type', 'password');
+      eyeIcon.classList.remove('fa-eye');
+      eyeIcon.classList.add('fa-eye-slash');
+    }
+  }
+
+  // Add event listeners for eye icons
+  document.querySelectorAll('.fa-eye').forEach(function (icon) {
+    icon.addEventListener('click', function () {
+      var inputField = this.previousElementSibling;
+      togglePasswordVisibility(inputField, this);
+    });
+  });
+
+  document.querySelectorAll('.fa-eye-slash').forEach(function (icon) {
+    icon.addEventListener('click', function () {
+      var inputField = this.previousElementSibling;
+      togglePasswordVisibility(inputField, this);
+    });
+  });
+</script>
