@@ -83,33 +83,33 @@ include 'include/links.php';
   }
 
   .inputBox {
-      border: 1px solid #000;
-      align-items: center;
-      border-radius: 7px;
-      padding-right: 10px;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
+    border: 1px solid #000;
+    align-items: center;
+    border-radius: 7px;
+    padding-right: 10px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
 
-    .inputBox input {
-      border: none;
-      margin-bottom: 0;
-      width: 100%;
-    }
+  .inputBox input {
+    border: none;
+    margin-bottom: 0;
+    width: 100%;
+  }
 
-    .inputBox i:hover {
-      cursor: pointer;
-      font-weight: bold;
-    }
+  .inputBox i:hover {
+    cursor: pointer;
+    font-weight: bold;
+  }
 </style>
 <title>Super Admin Login</title>
-<?php if (session()->has('success')) : ?>
+<?php if (session()->has('success')): ?>
   <div class="alert alert-success">
     <?= session('success') ?>
   </div>
 <?php endif; ?>
 
-<?php if (session()->has('error')) : ?>
+<?php if (session()->has('error')): ?>
   <div class="alert alert-danger">
     <?= session('error') ?>
   </div>
@@ -120,8 +120,8 @@ include 'include/links.php';
     <form id="loginForm" method="post" action="<?php echo base_url('employee-login') ?>">
       <input type="text" id="email" name="email" placeholder="Enter Email" required>
       <div class="d-flex inputBox">
-      <input type="password" id="password" name="password" placeholder="Enter Password" required>
-      <i class="fa fa-eye"></i>
+        <input type="password" id="password" name="password" placeholder="Enter Password" required>
+        <i class="fa fa-eye"></i>
       </div>
       <button class="w-100" type="submit">Login</button>
     </form>
