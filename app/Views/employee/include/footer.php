@@ -2,7 +2,7 @@
 <script>
     jQuery(document).ready(function($) {
         // Your code using $ as an alias to jQuery goes here...
-        $('#customername').select2();
+        $('#Customername').select2();
         $('#crate_for').select2();
         $('#dealername').select2();
         $('#select_unit').select2();

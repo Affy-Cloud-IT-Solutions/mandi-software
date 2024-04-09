@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Software</title>
-    <link rel="shortcut icon" type="image/png" href="<?= base_url('assets/images/logos/favicon.png')?>" />
-    <link rel="stylesheet" href="<?= base_url('assets/css/styles.min.css')?>" />
+    <link rel="shortcut icon" type="image/png" href="<?= base_url('assets/images/logos/favicon.png') ?>" />
+    <link rel="stylesheet" href="<?= base_url('assets/css/styles.min.css') ?>" />
 </head>
 
 <style>
@@ -52,13 +52,13 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                     <ul id="sidebarnav">
-                        <li class="nav-small-cap">
+                        <!-- <li class="nav-small-cap">
                             <span>
                                 <i class="ti ti-layout-dashboard"></i>
                             </span>
                             <span class="hide-menu">Dashboard</span>
-                        </li>
-                        <li class="sidebar-item">
+                        </li> -->
+                        <li class="sidebar-item" title="Dashboard">
                             <a class="sidebar-link" href="<?= base_url('super-admin') ?>" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-layout-dashboard"></i>
@@ -70,7 +70,7 @@
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">Crates</span>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Create Company">
                             <a class="sidebar-link" href="<?= base_url('create-company') ?>" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-pencil"></i>
@@ -78,7 +78,7 @@
                                 <span class="hide-menu">Create Company</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Company List">
                             <a class="sidebar-link" href="<?= base_url('company-list') ?>" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-article"></i>
@@ -86,7 +86,7 @@
                                 <span class="hide-menu">Company List</span>
                             </a>
                         </li>
-                       
+
 
                     </ul>
                 </nav>

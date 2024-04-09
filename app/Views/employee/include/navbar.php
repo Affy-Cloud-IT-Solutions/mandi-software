@@ -62,7 +62,7 @@
                             </span>
                             <span class="hide-menu">Dashboard</span>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Dashboard">
                             <a class="sidebar-link" href="<?= base_url('employee') ?>" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-layout-dashboard"></i>
@@ -74,18 +74,18 @@
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">Crates</span>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Customer Form">
                             <a class="sidebar-link" href="<?= base_url('employee/add-customer') ?>" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-pencil"></i>
+                                    <i class="ti ti-shopping-cart"></i>
                                 </span>
                                 <span class="hide-menu">Customer Form</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Dealer Form">
                             <a class="sidebar-link" href="<?= base_url('employee/add-dealer') ?>" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-pencil"></i>
+                                    <i class="ti ti-truck"></i>
                                 </span>
                                 <span class="hide-menu">Dealer Form</span>
                             </a>
@@ -94,18 +94,18 @@
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">Reports</span>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Customer Reports">
                             <a class="sidebar-link" href="<?= base_url('employee/customer-reports') ?>" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-article"></i>
+                                    <i class="ti ti-files"></i>
                                 </span>
                                 <span class="hide-menu">Customer Reports</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Dealer Reports">
                             <a class="sidebar-link" href="<?= base_url('employee/dealer-reports') ?>" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-article"></i>
+                                    <i class="ti ti-files"></i>
                                 </span>
                                 <span class="hide-menu">Dealer Reports</span>
                             </a>

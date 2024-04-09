@@ -60,7 +60,7 @@
                             </span>
                             <span class="hide-menu">Dashboard</span>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Dashboard">
                             <a class="sidebar-link" href="<?= base_url('') ?>" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-layout-dashboard"></i>
@@ -80,7 +80,7 @@
                                 <span class="hide-menu">Add Brand</span>
                             </a>
                         </li> -->
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Brands">
                             <a class="sidebar-link" href="<?= base_url('crate-list') ?>" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-article"></i>
@@ -88,34 +88,34 @@
                                 <span class="hide-menu">Brands</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Customer Form">
                             <a class="sidebar-link" href="<?= base_url('add-customer') ?>" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-article"></i>
+                                    <i class="ti ti-shopping-cart"></i>
                                 </span>
                                 <span class="hide-menu">Customer Form</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Customer List">
                             <a class="sidebar-link" href="<?= base_url('customer-list') ?>" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-article"></i>
+                                    <i class="ti ti-list"></i>
                                 </span>
                                 <span class="hide-menu">Customer List</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Dealer Form">
                             <a class="sidebar-link" href="<?= base_url('add-dealer') ?>" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-article"></i>
+                                    <i class="ti ti-truck"></i>
                                 </span>
                                 <span class="hide-menu">Dealer Form</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Dealer List">
                             <a class="sidebar-link" href="<?= base_url('dealer-list') ?>" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-article"></i>
+                                    <i class="ti ti-list"></i>
                                 </span>
                                 <span class="hide-menu">Dealer List</span>
                             </a>
@@ -124,18 +124,18 @@
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">Users</span>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Add User">
                             <a class="sidebar-link" href="<?= base_url('add-user') ?>" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-pencil"></i>
+                                    <i class="ti ti-user"></i>
                                 </span>
                                 <span class="hide-menu">Add User</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="User List">
                             <a class="sidebar-link" href="<?= base_url('user-list') ?>" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-article"></i>
+                                    <i class="ti ti-list"></i>
                                 </span>
                                 <span class="hide-menu">User List</span>
                             </a>
@@ -152,18 +152,18 @@
                                 <span class="hide-menu">Crate Reports</span>
                             </a>
                         </li> -->
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Customer Reports">
                             <a class="sidebar-link" href="<?= base_url('company-customer-reports') ?>" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-article"></i>
+                                    <i class="ti ti-files"></i>
                                 </span>
                                 <span class="hide-menu">Customer Reports</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" title="Dealer Reports">
                             <a class="sidebar-link" href="<?= base_url('dealer-reports') ?>" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-article"></i>
+                                    <i class="ti ti-files"></i>
                                 </span>
                                 <span class="hide-menu">Dealer Reports</span>
                             </a>
