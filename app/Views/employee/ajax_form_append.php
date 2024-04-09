@@ -1,7 +1,7 @@
 <div class="row">
 
     <div class="col-md-4 my-2">
-        <label class="mb-2" for="crate_name"><b> Total Stocks</b></label>
+        <label class="mb-2" for="crate_name"><b> Total Crates</b></label>
         <input class="form-control" type="text" placeholder="Total Stocks" id="totalStocks" readonly>
     </div>
 
@@ -18,7 +18,7 @@
                 <td><?= ++$key ?></td>
                 <td><?= $row->brandName ?></td>
                 <td>
-                    <input class="form-control total_stocks_cal" type="text" value="<?= $row->numberOfCrates ?>" placeholder="0" readonly>
+                    <input class="form-control total_stocks_cal" type="text" value="<?= $row->numberOfCrates ?>" placeholder="0">
                 </td>
             </tr>
         <?php } ?>
