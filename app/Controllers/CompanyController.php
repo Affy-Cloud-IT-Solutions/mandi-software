@@ -390,4 +390,181 @@ class CompanyController extends BaseController
         $this->session->destroy();
         return redirect()->to(base_url("company-login"));
     }
+
+    public function uploadBulkCustomer()
+    {
+        $file = $this->request->getFile('crate_bulk');
+
+        if ($file->isValid() && !$file->hasMoved()) {
+            // Read the file
+            $fileContent = file_get_contents($file->getTempName());
+
+            // Split the content by line breaks
+            $lines = explode("\n", $fileContent);
+
+            // Remove the first line (headers)
+            $header = array_shift($lines);
+
+            // Extract column names from header
+            $columns = str_getcsv($header, ",");
+
+            // Check if required columns are present
+            $requiredColumns = ['Name', 'Mobile'];
+            foreach ($requiredColumns as $requiredColumn) {
+                if (!in_array($requiredColumn, $columns)) {
+                    // Return error if any required column is missing
+                    return redirect()->back()->with('error', 'One or more required columns are missing in the CSV file.');
+                }
+            }
+
+            // Loop through each line
+            foreach ($lines as $line) {
+                // Split the line by comma (assuming CSV format)
+                $data = str_getcsv($line, ",");
+
+                // Check if $data array has enough elements
+                if (count($data) >= 3) {
+                    // Extract data
+                    $name = $data[array_search('Name', $columns)]; // Name is in the column specified by the 'Name' header
+                    $mobile = $data[array_search('Mobile', $columns)]; // Mobile is in the column specified by the 'Mobile' header
+
+                    // Insert into database
+                    $insertData = [
+                        'customerName' => trim($name),
+                        'phone' => trim($mobile),
+                        'date' => date('Y-m-d H:i:s'),
+                        'company_idd' => $_SESSION['companyUID']
+                    ];
+
+                    $this->CustomerModel->insert($insertData);
+                }
+            }
+
+            // Redirect with success message
+            return redirect()->to(base_url('customer-list'))->with('success', 'Bulk data uploaded successfully.');
+        } else {
+            // Handle file upload error
+            return redirect()->back()->with('error', 'Error uploading file.');
+        }
+    }
+
+    public function uploadBulkDealer()
+    {
+        $file = $this->request->getFile('crate_bulk');
+
+        if ($file->isValid() && !$file->hasMoved()) {
+            // Read the file
+            $fileContent = file_get_contents($file->getTempName());
+
+            // Split the content by line breaks
+            $lines = explode("\n", $fileContent);
+
+            // Remove the first line (headers)
+            $header = array_shift($lines);
+
+            // Extract column names from header
+            $columns = str_getcsv($header, ",");
+
+            // Check if required columns are present
+            $requiredColumns = ['Name', 'Mobile'];
+            foreach ($requiredColumns as $requiredColumn) {
+                if (!in_array($requiredColumn, $columns)) {
+                    // Return error if any required column is missing
+                    return redirect()->back()->with('error', 'One or more required columns are missing in the CSV file.');
+                }
+            }
+
+            // Loop through each line
+            foreach ($lines as $line) {
+                // Split the line by comma (assuming CSV format)
+                $data = str_getcsv($line, ",");
+
+                // Check if $data array has enough elements
+                if (count($data) >= 3) {
+                    // Extract data
+                    $name = $data[array_search('Name', $columns)]; // Name is in the column specified by the 'Name' header
+                    $mobile = $data[array_search('Mobile', $columns)]; // Mobile is in the column specified by the 'Mobile' header
+
+                    // Insert into database
+                    $insertData = [
+                        'dealer_name' => trim($name),
+                        'dealer_no' => trim($mobile),
+                        'date' => date('Y-m-d H:i:s'),
+                        'company_idd' => $_SESSION['companyUID']
+                    ];
+
+                    $this->DealerModel->insert($insertData);
+                }
+            }
+
+            // Redirect with success message
+            return redirect()->to(base_url('dealer-list'))->with('success', 'Bulk data uploaded successfully.');
+        } else {
+            // Handle file upload error
+            return redirect()->back()->with('error', 'Error uploading file.');
+        }
+    }
+
+
+    public function uploadBulkCrate()
+    {
+        // Get the uploaded file
+        $file = $this->request->getFile('crate_bulk');
+
+        if ($file->isValid() && !$file->hasMoved()) {
+            // Read the file content
+            $fileContent = file_get_contents($file->getTempName());
+
+            // Split the content by line breaks
+            $lines = explode("\n", $fileContent);
+
+            // Remove any empty lines
+            $lines = array_filter($lines);
+
+            // Skip the first row (header row)
+            array_shift($lines);
+
+            // Loop through each line
+            foreach ($lines as $line) {
+                // Split the line by comma (assuming CSV format)
+                $data = explode(",", $line);
+
+                // Check if $data array has enough elements
+                if (count($data) >= 4) {
+                    // Extract data
+                    $brandName = $data[1]; // Brand name is in the second column
+                    $ownerName = $data[2]; // Owner name is in the third column
+                    $numberOfCrates = $data[3]; // Number of crates is in the fourth column
+
+                    // Prepare data for insertion
+                    $companyUID = $_SESSION['companyUID'];
+                    $dataKeyValue = [
+                        'brandName' => trim($brandName),
+                        'ownerName' => trim($ownerName),
+                        'numberOfCrates' => trim($numberOfCrates),
+                        'company_idd' => $companyUID,
+                        'created_at' => date('Y-m-d H:i:s'),
+                    ];
+
+                    // Insert data into database
+                    $dataInsert = $this->BrandModel->insert($dataKeyValue);
+
+                    if (!$dataInsert) {
+                        // If insertion fails, return with error message
+                        return redirect()->back()->with('error', 'Error inserting data into database.');
+                    }
+                } else {
+                    return redirect()->back()->with('error', 'The line doesn\'t have enough columns');
+                    // Handle case where the line doesn't have enough columns
+                    // Log an error, skip the line, or handle it based on your requirement
+                }
+            }
+
+            // Redirect with success message
+            return redirect()->back()->with('success', 'Bulk upload successful.');
+        } else {
+            // Handle file upload error
+            return redirect()->back()->with('error', 'Error uploading file.');
+        }
+    }
 }

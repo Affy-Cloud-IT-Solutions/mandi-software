@@ -34,7 +34,7 @@ $routes->group('/', ['filter' => 'FilterCompany'], function ($routes) {
     $routes->get('crate-list', 'CompanyController::crateList');
     $routes->post('save-crate', 'CompanyController::saveCrate');
     $routes->get('crate-delete/(:num)', 'CompanyController::crateDelete/$1');
-
+    $routes->post('crate-upload-bulk', 'CompanyController::uploadBulkCrate');
 
     // $routes->get('add-form-crate', 'CompanyController::addFormCrate');
     // $routes->post('save-form-crate', 'CompanyController::saveFormCrate');
@@ -47,6 +47,7 @@ $routes->group('/', ['filter' => 'FilterCompany'], function ($routes) {
     $routes->post('save-customer-form', 'CompanyController::saveCustomerForm');
     $routes->post('company-update-customer', 'CompanyController::companyUpdateCustomer');
     $routes->get('customer-delete/(:num)', 'CompanyController::customerDelete/$1');
+    $routes->post('upload-bulk', 'CompanyController::uploadBulkCustomer');
 
     //DEALERS
     $routes->get('add-dealer', 'CompanyController::addDealer');
@@ -55,6 +56,7 @@ $routes->group('/', ['filter' => 'FilterCompany'], function ($routes) {
     $routes->post('company-save-dealer', 'CompanyController::companySaveDealer');
     $routes->post('company-update-dealer', 'CompanyController::companyUpdateDealer');
     $routes->get('dealer-delete/(:num)', 'CompanyController::dealerDelete/$1');
+    $routes->post('dealer-upload-bulk', 'CompanyController::uploadBulkDealer');
 
     //USERS
 

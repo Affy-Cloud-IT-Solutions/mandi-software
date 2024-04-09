@@ -170,11 +170,11 @@ require 'include/navbar.php';
                 <hr>
                 <h4 class="text-center">or</h4>
                 <hr>
-                <form action="">
+                <form action="<?= base_url('upload-bulk') ?>" method="post" enctype="multipart/form-data">
                     <div class="col-md-12 my-2">
                         <label class="mb-2" for="crate_bulk"><b> Bulk Upload</b></label>
                         <br>
-                        <input class="form-control" type="file" id="crate_bulk" name="crate_bulk" placeholder="Number of Crates" required>
+                        <input class="form-control" type="file" accept=".csv" id="crate_bulk" name="crate_bulk" placeholder="Number of Crates" required>
                     </div>
                     <button class="btn btn-success">Upload</button>
                 </form>

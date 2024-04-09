@@ -76,6 +76,22 @@ require 'include/navbar.php';
 </style>
 
 <div class="container-fluid">
+
+<?php if (session()->has('error')) : ?>
+    <div class="alert alert-danger">
+        <?php
+        // Check if session('error') is an array
+        if (is_array(session('error'))) {
+            // If it's an array, convert it to a string
+            echo implode('<br>', session('error'));
+        } else {
+            // If it's not an array, output it directly
+            echo session('error');
+        }
+        ?>
+    </div>
+<?php endif; ?>
+
     <!--  Row 1 -->
     <div class="row">
         <div class="col-lg-12">
@@ -111,9 +127,7 @@ require 'include/navbar.php';
                                             <td>
                                                 <?= $row->numberOfCrates ?>
                                             </td>
-                                            <td><a href="<?php echo base_url("crate-delete/$row->id"); ?>" title="Delete"><i
-                                                        onclick="return confirm('Are you sure you want to Delete this Crate?')"
-                                                        style="cursor:pointer; color:red" class="ti ti-trash"></i></a></td>
+                                            <td><a href="<?php echo base_url("crate-delete/$row->id"); ?>" title="Delete"><i onclick="return confirm('Are you sure you want to Delete this Crate?')" style="cursor:pointer; color:red" class="ti ti-trash"></i></a></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
@@ -127,8 +141,7 @@ require 'include/navbar.php';
 
     <!-- Modal Add Brand -->
     <!-- Modal -->
-    <div class="modal fade" id="addCrateModalModal" tabindex="-1" role="dialog" aria-labelledby="addCrateModalModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addCrateModalModal" tabindex="-1" role="dialog" aria-labelledby="addCrateModalModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -143,18 +156,15 @@ require 'include/navbar.php';
                             <div class="row">
                                 <div class="col-md-4 my-2">
                                     <label class="mb-2" for="crate_name"><b> Brand Name</b></label>
-                                    <input class="form-control" type="text" id="brand_name" name="brand_name"
-                                        placeholder="Brand Name" required>
+                                    <input class="form-control" type="text" id="brand_name" name="brand_name" placeholder="Brand Name" required>
                                 </div>
                                 <div class="col-md-4 my-2">
                                     <label class="mb-2" for="crate_name"><b> Owner Name</b></label>
-                                    <input class="form-control" type="text" id="owner_name" name="owner_name"
-                                        placeholder="Owner Name" required>
+                                    <input class="form-control" type="text" id="owner_name" name="owner_name" placeholder="Owner Name" required>
                                 </div>
                                 <div class="col-md-4 my-2">
                                     <label class="mb-2" for="crate_name"><b> Number of Crates</b></label>
-                                    <input class="form-control" type="text" id="no_crate" name="no_crate"
-                                        placeholder="Number of Crates" required>
+                                    <input class="form-control" type="text" id="no_crate" name="no_crate" placeholder="Number of Crates" required>
                                 </div>
                                 <div class="col-md-12 my-2">
                                     <button class="btn btn-primary">Save</button>
@@ -165,12 +175,11 @@ require 'include/navbar.php';
                     <hr>
                     <h4 class="text-center">or</h4>
                     <hr>
-                    <form action="">
+                    <form action="<?= base_url('crate-upload-bulk') ?>" method="post" enctype="multipart/form-data">
                         <div class="col-md-12 my-2">
                             <label class="mb-2" for="crate_bulk"><b> Bulk Upload</b></label>
                             <br>
-                            <input class="form-control" type="file" id="crate_bulk" name="crate_bulk"
-                                placeholder="Number of Crates" required>
+                            <input class="form-control" type="file" accept=".csv" id="crate_bulk" name="crate_bulk" placeholder="Number of Crates" required>
                         </div>
                         <button class="btn btn-success">Upload</button>
                     </form>
