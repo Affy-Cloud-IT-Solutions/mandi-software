@@ -9,6 +9,7 @@ require 'include/navbar.php';
     .form-inputs input {
         color: #000;
         border: 1px solid #000;
+        
     }
 </style>
 
