@@ -489,7 +489,7 @@ class CompanyController extends BaseController
                     $insertData = [
                         'dealer_name' => trim($name),
                         'dealer_no' => trim($mobile),
-                        'date' => date('Y-m-d H:i:s'),
+                        'created_date' => date('Y-m-d H:i:s'),
                         'company_idd' => $_SESSION['companyUID']
                     ];
 

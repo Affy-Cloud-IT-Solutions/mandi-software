@@ -88,6 +88,7 @@ require 'include/navbar.php';
                                     <th>Unit</th>
                                     <th>Stock</th>
                                     <th>Vehicle Number</th>
+                                    <th>Created Date</th>
                                 </thead>
                                 <tbody>
                                     <?php
@@ -109,6 +110,7 @@ require 'include/navbar.php';
                                                 <td><?= $row->units ?></td>
                                                 <td><?= $BrandData->numberOfCrates ?></td>
                                                 <td><?= $row->vehicle_number ?></td>
+                                                <td> <?= $row->created_at ?></td>
                                             </tr>
                                     <?php }
                                     } ?>

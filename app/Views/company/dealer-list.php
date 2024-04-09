@@ -115,7 +115,7 @@ require 'include/navbar.php';
                                             <td><?= ++$key ?></td>
                                             <td><?= $row->dealer_name ?></td>
                                             <td><?= $row->dealer_no ?></td>
-                                            <td><?= date('d-m-Y', strtotime($row->created_date)) ?></td>
+                                            <td><?= date('d-m-Y H:i:s', strtotime($row->created_date)) ?></td>
                                             <td>
                                                 <a href="#>" title="Edit" onclick="editDealer('<?= $row->id ?>','<?= $row->dealer_name ?>','<?= $row->dealer_no ?>')"><i style="cursor:pointer;" class="ti ti-pencil"></i></a>
                                                 <a href="<?php echo base_url("dealer-delete/$row->id"); ?>" title="Delete"><i onclick="return confirm('Are you sure you want to Delete this dealer?')" style="cursor:pointer; color:red" class="ti ti-trash"></i></a>
