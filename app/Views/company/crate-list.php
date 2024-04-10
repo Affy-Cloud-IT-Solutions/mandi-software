@@ -77,20 +77,18 @@ require 'include/navbar.php';
 
 <div class="container-fluid">
 
-<?php if (session()->has('error')) : ?>
-    <div class="alert alert-danger">
-        <?php
-        // Check if session('error') is an array
-        if (is_array(session('error'))) {
-            // If it's an array, convert it to a string
-            echo implode('<br>', session('error'));
-        } else {
-            // If it's not an array, output it directly
-            echo session('error');
-        }
-        ?>
-    </div>
-<?php endif; ?>
+    <?php if (session()->has('success')) : ?>
+        <div class="alert alert-success">
+            <?= session('success') ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->has('error')) : ?>
+        <div class="alert alert-danger">
+            <?= session('error') ?>
+        </div>
+    <?php endif; ?>
+
 
     <!--  Row 1 -->
     <div class="row">
